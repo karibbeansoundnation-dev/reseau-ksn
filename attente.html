@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#042F35">
+<title>Bientôt — KSN | Karibbean Sound Nation</title>
+<meta name="description" content="Le site officiel de Karibbean Sound Nation, le réseau professionnel de l'industrie musicale antillo-guyanaise, ouvre le 18 novembre 2026. Rejoignez la communauté et soyez informé·e de son arrivée.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="KSN — Karibbean Sound Nation">
+<meta property="og:title" content="Quelque chose se construit — KSN">
+<meta property="og:description" content="Le site officiel de Karibbean Sound Nation ouvre le 18 novembre. Rejoignez la communauté et soyez informé·e de son arrivée.">
+<meta property="og:image" content="https://www.reseau-ksn.fr/assets/og-attente.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#062D32; --teal:#05434A; --teal-deep:#042F35; --teal-mid:#17606B;
+  --gold:#E3B567; --gold-deep:#B08440; --gold-pale:#F1E2BC; --cream:#FBF3E3;
+  --r-card:22px; --r-btn:999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  min-height:100vh;min-height:100svh;
+  background:var(--teal-deep);color:var(--cream);
+  font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;font-weight:500;
+  font-size:1.0625rem;line-height:1.55;
+  display:flex;flex-direction:column;overflow-x:hidden;
+}
+/* fond : dégradé fixe + grain très léger */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:radial-gradient(120% 70% at 50% 22%, #0b5560 0%, var(--teal) 36%, var(--teal-deep) 70%, #021c20 100%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.1;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+.bg-logo{position:fixed;left:50%;top:42%;width:min(140vw,1100px);max-width:none;transform:translate(-50%,-50%);opacity:.05;filter:blur(4px);pointer-events:none;z-index:-1}
+
+/* cadre de visée, comme dans la vidéo */
+.frame{position:fixed;z-index:0;pointer-events:none;
+  inset:calc(12px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left))}
+.frame i{position:absolute;width:24px;height:24px;border:0 solid rgba(227,181,103,.5)}
+.frame i:nth-child(1){left:0;top:0;border-left-width:2px;border-top-width:2px}
+.frame i:nth-child(2){right:0;top:0;border-right-width:2px;border-top-width:2px}
+.frame i:nth-child(3){left:0;bottom:0;border-left-width:2px;border-bottom-width:2px}
+.frame i:nth-child(4){right:0;bottom:0;border-right-width:2px;border-bottom-width:2px}
+
+.wrap{
+  position:relative;z-index:1;flex:1;width:100%;max-width:46rem;margin:0 auto;
+  padding:calc(2.4rem + env(safe-area-inset-top)) max(1.4rem, env(safe-area-inset-right)) 1.4rem max(1.4rem, env(safe-area-inset-left));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1.35rem;
+}
+.rise{animation:rise .8s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0) * .09s)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+.logo{width:84px;height:auto;display:block;filter:drop-shadow(0 0 28px rgba(227,181,103,.28))}
+.eyebrow{
+  border:1px solid rgba(227,181,103,.55);padding:.5rem .95rem;
+  font-weight:700;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-pale);
+  padding-left:calc(.95rem + .32em);
+}
+h1{
+  font-family:'Anton',Impact,'Arial Narrow',sans-serif;font-weight:400;text-transform:uppercase;
+  font-size:clamp(3.05rem,min(13.4vw,10.5vh),6.4rem);line-height:1.02;letter-spacing:.01em;text-wrap:balance;
+}
+h1 em{font-style:normal;color:var(--gold);display:block}
+.lead{max-width:33rem;font-size:1.08rem;color:rgba(251,243,227,.9)}
+.lead strong{color:var(--gold-pale);font-weight:700;white-space:nowrap}
+
+/* appel à l'action */
+.cta{display:flex;flex-direction:column;align-items:center;gap:.75rem;width:100%}
+.btn{
+  display:flex;align-items:center;justify-content:center;width:100%;max-width:27rem;min-height:58px;
+  padding:1rem 1.7rem;border-radius:var(--r-btn);
+  background:var(--gold);color:var(--ink);text-decoration:none;
+  font-weight:700;font-size:1.03rem;line-height:1.35;text-align:center;
+  box-shadow:0 10px 34px rgba(0,0,0,.28),0 0 0 1px rgba(251,243,227,.12) inset;
+  transition:background .2s,transform .2s,box-shadow .2s;-webkit-tap-highlight-color:transparent;
+}
+.btn:hover{background:var(--gold-pale);box-shadow:0 14px 40px rgba(0,0,0,.34)}
+.btn:active{transform:scale(.975)}
+.btn:focus-visible{outline:3px solid var(--cream);outline-offset:4px}
+.note{font-size:.84rem;color:rgba(241,226,188,.72)}
+
+/* chargement bloqué à 99 % + compte à rebours */
+.below{width:100%;display:flex;flex-direction:column;gap:1.1rem;margin-top:.6rem;text-align:left}
+.load{width:100%}
+.load-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:.55rem}
+.load-top span{font-weight:700;font-size:.74rem;letter-spacing:.34em;text-transform:uppercase;color:rgba(251,243,227,.82);padding-bottom:.28rem}
+.load-top b{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:2.4rem;line-height:1;color:var(--gold)}
+.track{position:relative;height:14px;border-radius:999px;border:2px solid rgba(227,181,103,.6);background:rgba(4,47,53,.55);overflow:hidden}
+.track .fill{position:absolute;left:0;top:0;bottom:0;width:99%;border-radius:999px;background:linear-gradient(90deg,var(--gold-deep),var(--gold) 55%,var(--gold-pale));overflow:hidden}
+.track .fill::after{content:"";position:absolute;top:0;bottom:0;width:70px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);animation:shine 2.6s ease-in-out infinite}
+.track .sliver{position:absolute;right:0;top:0;bottom:0;width:1%;min-width:6px;background:var(--gold-pale);animation:pulse 1.3s ease-in-out infinite}
+@keyframes shine{from{left:-80px}to{left:100%}}
+@keyframes pulse{0%,100%{opacity:.2}50%{opacity:1}}
+.load p{margin-top:.6rem;font-size:.86rem;color:rgba(241,226,188,.78)}
+
+.count{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;width:100%}
+.count div{
+  border:1px solid rgba(227,181,103,.35);border-radius:var(--r-card);background:rgba(4,47,53,.55);
+  padding:.85rem .4rem .7rem;text-align:center;
+}
+.count b{display:block;font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:2.35rem;line-height:1.05;color:var(--cream);font-variant-numeric:tabular-nums}
+.count span{display:block;margin-top:.2rem;font-weight:700;font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-pale);padding-left:.26em}
+.count-done{width:100%;text-align:center;font-weight:700;color:var(--gold-pale)}
+
+footer{position:relative;z-index:1;padding:.4rem 1.4rem calc(1.6rem + env(safe-area-inset-bottom));text-align:center;font-size:.76rem;line-height:1.5;color:rgba(241,226,188,.62)}
+
+@media (min-width:720px){
+  body{font-size:1.125rem}
+  .wrap{gap:1.5rem;padding-top:calc(1.8rem + env(safe-area-inset-top))}
+  .logo{width:92px}
+  .frame i{width:56px;height:56px}
+  .below{flex-direction:row;align-items:stretch;gap:1.6rem;margin-top:1rem}
+  .below>*{flex:1 1 0;min-width:0}
+  .count{align-content:start}
+}
+@media (max-width:360px){
+  body{font-size:1rem}
+  h1{font-size:13vw}
+  .btn{padding:.9rem 1.2rem;font-size:.98rem}
+  .count b{font-size:2rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .rise,.track .fill::after,.track .sliver{animation:none}
+  .track .sliver{opacity:1}
+  .btn{transition:none}
+}
+</style>
+</head>
+<body>
+
+<img class="bg-logo" src="assets/logo-mark-light.png" alt="" width="280" height="260">
+<div class="frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+<main class="wrap">
+  <img class="logo rise" style="--i:0" src="assets/logo-mark-light.png" width="280" height="260" alt="Logo KSN">
+  <p class="eyebrow rise" style="--i:1">Bientôt · en chantier</p>
+  <h1 class="rise" style="--i:2">Quelque chose<em>se construit.</em></h1>
+  <p class="lead rise" style="--i:3">Le site officiel de Karibbean Sound Nation, le réseau professionnel de l'industrie musicale antillo-guyanaise, ouvre ses portes <strong>le 18 novembre 2026</strong>.</p>
+
+  <div class="cta rise" style="--i:4">
+    <a class="btn" href="https://forms.gle/UgghktowpWVSAXh7A" target="_blank" rel="noopener noreferrer">Je veux rejoindre la communauté et être informé de l'arrivée du site</a>
+    <p class="note">Le formulaire s'ouvre dans un nouvel onglet.</p>
+  </div>
+
+  <div class="below rise" style="--i:5">
+    <div class="load">
+      <div class="load-top"><span>Chargement</span><b>99%</b></div>
+      <div class="track" role="progressbar" aria-label="Chargement du site" aria-valuemin="0" aria-valuemax="100" aria-valuenow="99">
+        <div class="fill"></div><div class="sliver"></div>
+      </div>
+      <p>Le dernier 1&nbsp;% demande encore un peu de temps.</p>
+    </div>
+    <div class="count" id="count" hidden aria-label="Temps restant avant l'ouverture">
+      <div><b id="cd-d">0</b><span>jours</span></div>
+      <div><b id="cd-h">00</b><span>heures</span></div>
+      <div><b id="cd-m">00</b><span>min</span></div>
+    </div>
+  </div>
+</main>
+
+<footer>© 2026 Karibbean Sound Nation — Association loi 1901 · Martinique</footer>
+
+<script>
+(function () {
+  // Ouverture : 18 novembre 2026, 00 h (heure de Martinique, UTC-4)
+  var target = new Date('2026-11-18T00:00:00-04:00').getTime();
+  var box = document.getElementById('count');
+  var d = document.getElementById('cd-d'), h = document.getElementById('cd-h'), m = document.getElementById('cd-m');
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function tick() {
+    var diff = target - Date.now();
+    if (diff <= 0) {
+      box.className = 'count-done';
+      box.innerHTML = 'C\'est pour très bientôt.';
+      box.hidden = false;
+      return false;
+    }
+    d.textContent = Math.floor(diff / 86400000);
+    h.textContent = pad(Math.floor(diff % 86400000 / 3600000));
+    m.textContent = pad(Math.floor(diff % 3600000 / 60000));
+    box.hidden = false;
+    return true;
+  }
+  try { if (tick()) setInterval(tick, 20000); } catch (e) { /* le compte à rebours reste simplement caché */ }
+})();
+</script>
+</body>
+</html>

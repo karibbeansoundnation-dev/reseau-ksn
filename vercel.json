@@ -1,0 +1,12 @@
+{
+  "redirects": [
+    { "source": "/", "destination": "/attente.html", "permanent": false },
+    { "source": "/index.html", "destination": "/attente.html", "permanent": false },
+    { "source": "/ksn.html", "destination": "/attente.html", "permanent": false },
+    { "source": "/reseau.html", "destination": "/attente.html", "permanent": false },
+    { "source": "/actus.html", "destination": "/attente.html", "permanent": false },
+    { "source": "/nous-rejoindre.html", "destination": "/attente.html", "permanent": false },
+    { "source": "/newsletter.html", "destination": "/attente.html", "permanent": false },
+    { "source": "/contact.html", "destination": "/attente.html", "permanent": false }
+  ]
+}
