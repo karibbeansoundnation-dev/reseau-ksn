@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#042F35">
+<meta name="robots" content="noindex, nofollow">
+<title>Accès privé — KSN | Karibbean Sound Nation</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#062D32; --teal:#05434A; --teal-deep:#042F35; --teal-mid:#17606B;
+  --gold:#E3B567; --gold-deep:#B08440; --gold-pale:#F1E2BC; --cream:#FBF3E3;
+  --r-btn:999px; --r-field:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  min-height:100vh;min-height:100svh;background:var(--teal-deep);color:var(--cream);
+  font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;font-weight:500;font-size:1.0625rem;line-height:1.55;
+  display:flex;flex-direction:column;overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:radial-gradient(120% 70% at 50% 22%, #0b5560 0%, var(--teal) 36%, var(--teal-deep) 70%, #021c20 100%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.1;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+.frame{position:fixed;z-index:0;pointer-events:none;
+  inset:calc(12px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left))}
+.frame i{position:absolute;width:24px;height:24px;border:0 solid rgba(227,181,103,.5)}
+.frame i:nth-child(1){left:0;top:0;border-left-width:2px;border-top-width:2px}
+.frame i:nth-child(2){right:0;top:0;border-right-width:2px;border-top-width:2px}
+.frame i:nth-child(3){left:0;bottom:0;border-left-width:2px;border-bottom-width:2px}
+.frame i:nth-child(4){right:0;bottom:0;border-right-width:2px;border-bottom-width:2px}
+
+.wrap{
+  position:relative;z-index:1;flex:1;width:100%;max-width:34rem;margin:0 auto;
+  padding:calc(2.4rem + env(safe-area-inset-top)) max(1.4rem, env(safe-area-inset-right)) 1.4rem max(1.4rem, env(safe-area-inset-left));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:1.3rem;
+}
+.logo{width:76px;height:auto;display:block;filter:drop-shadow(0 0 28px rgba(227,181,103,.28))}
+.eyebrow{
+  border:1px solid rgba(227,181,103,.55);padding:.5rem .95rem .5rem calc(.95rem + .32em);
+  font-weight:700;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold-pale);
+}
+h1{font-family:'Anton',Impact,'Arial Narrow',sans-serif;font-weight:400;text-transform:uppercase;
+  font-size:clamp(2.8rem,12vw,4.6rem);line-height:1.04;letter-spacing:.01em;text-wrap:balance}
+h1 em{font-style:normal;color:var(--gold);display:block}
+.lead{max-width:28rem;color:rgba(251,243,227,.9)}
+
+form{width:100%;display:flex;flex-direction:column;align-items:center;gap:.9rem;margin-top:.3rem}
+label{font-weight:700;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-pale);padding-left:.3em}
+input{
+  width:100%;max-width:24rem;min-height:56px;padding:0 1.2rem;border-radius:var(--r-field);
+  border:1.5px solid rgba(227,181,103,.55);background:rgba(4,47,53,.65);color:var(--cream);
+  font:inherit;font-size:1.0625rem;letter-spacing:.04em;text-align:center;
+}
+input::placeholder{color:rgba(241,226,188,.5);letter-spacing:.04em}
+input:focus{outline:3px solid rgba(227,181,103,.35);outline-offset:2px;border-color:var(--gold)}
+.btn{
+  display:flex;align-items:center;justify-content:center;width:100%;max-width:24rem;min-height:56px;padding:.9rem 1.6rem;
+  border:0;border-radius:var(--r-btn);background:var(--gold);color:var(--ink);cursor:pointer;
+  font:inherit;font-weight:700;font-size:1.03rem;
+  box-shadow:0 10px 34px rgba(0,0,0,.28),0 0 0 1px rgba(251,243,227,.12) inset;
+  transition:background .2s,transform .2s;-webkit-tap-highlight-color:transparent;
+}
+.btn:hover{background:var(--gold-pale)}
+.btn:active{transform:scale(.975)}
+.btn:focus-visible{outline:3px solid var(--cream);outline-offset:4px}
+.btn[disabled]{opacity:.65;cursor:progress}
+#msg{min-height:1.5em;font-weight:700;font-size:.95rem;color:var(--gold-pale)}
+.back{font-size:.88rem;color:rgba(241,226,188,.72)}
+.back a{color:var(--gold-pale);text-underline-offset:3px}
+footer{position:relative;z-index:1;padding:.4rem 1.4rem calc(1.6rem + env(safe-area-inset-bottom));text-align:center;font-size:.76rem;color:rgba(241,226,188,.62)}
+@media (max-width:360px){body{font-size:1rem}h1{font-size:12vw}}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+<main class="wrap">
+  <img class="logo" src="assets/logo-mark-light.png" width="280" height="260" alt="Logo KSN">
+  <p class="eyebrow">Accès privé</p>
+  <h1>Aperçu<em>réservé.</em></h1>
+  <p class="lead">Entrez le mot de passe reçu de l'équipe KSN pour découvrir le site avant son ouverture au public.</p>
+
+  <form id="form" novalidate>
+    <label for="pw">Mot de passe</label>
+    <input id="pw" name="pw" type="password" autocomplete="current-password" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="••••••••" required>
+    <button class="btn" id="go" type="submit">Voir le site</button>
+    <p id="msg" role="alert" aria-live="assertive"></p>
+  </form>
+
+  <p class="back"><a href="attente.html">Retour à la page d'attente</a></p>
+</main>
+
+<footer>© 2026 Karibbean Sound Nation — Association loi 1901 · Martinique</footer>
+
+<script>
+(function () {
+  var form = document.getElementById('form'), pw = document.getElementById('pw');
+  var go = document.getElementById('go'), msg = document.getElementById('msg');
+  var COOKIE = 'ksn_acces';
+
+  // Le navigateur calcule l'empreinte du mot de passe, la dépose dans un cookie, puis le SERVEUR
+  // compare cette empreinte à la sienne : aucun mot de passe ni empreinte n'est écrit dans cette page.
+  function sha256hex(text) {
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)).then(function (buf) {
+      return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ('0' + b.toString(16)).slice(-2); }).join('');
+    });
+  }
+  function setCookie(value, maxAge) {
+    document.cookie = COOKIE + '=' + value + '; Path=/; Max-Age=' + maxAge + '; SameSite=Lax' + (location.protocol === 'https:' ? '; Secure' : '');
+  }
+  function fail(text) {
+    setCookie('', 0);
+    msg.textContent = text;
+    go.disabled = false;
+    pw.focus(); pw.select();
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var typed = pw.value.trim().toLowerCase();
+    if (!typed) { fail('Entrez le mot de passe.'); return; }
+    if (!(window.crypto && crypto.subtle)) { fail('Ouvrez ce lien dans Safari ou Chrome (connexion sécurisée requise).'); return; }
+    go.disabled = true; msg.textContent = 'Vérification…';
+    sha256hex('ksn:' + typed).then(function (hash) {
+      setCookie(hash, 60 * 60 * 24 * 14);
+      // Si le mot de passe est faux, le serveur renvoie vers la page d'attente (redirection).
+      return fetch('index.html', { redirect: 'manual', credentials: 'same-origin', cache: 'no-store' });
+    }).then(function (r) {
+      if (r.type === 'opaqueredirect' || (r.status >= 300 && r.status < 400)) { fail('Mot de passe incorrect.'); return; }
+      if (!r.ok) { fail('Une erreur est survenue, réessayez dans un instant.'); return; }
+      location.href = 'index.html';
+    }).catch(function () { fail('Connexion impossible, réessayez dans un instant.'); });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,12 +1,100 @@
 {
   "redirects": [
-    { "source": "/", "destination": "/attente.html", "permanent": false },
-    { "source": "/index.html", "destination": "/attente.html", "permanent": false },
-    { "source": "/ksn.html", "destination": "/attente.html", "permanent": false },
-    { "source": "/reseau.html", "destination": "/attente.html", "permanent": false },
-    { "source": "/actus.html", "destination": "/attente.html", "permanent": false },
-    { "source": "/nous-rejoindre.html", "destination": "/attente.html", "permanent": false },
-    { "source": "/newsletter.html", "destination": "/attente.html", "permanent": false },
-    { "source": "/contact.html", "destination": "/attente.html", "permanent": false }
+    {
+      "source": "/",
+      "missing": [
+        {
+          "type": "cookie",
+          "key": "ksn_acces",
+          "value": "035a65c965e9f7ba23844583c8ed054a7dee4109028ca0dca8275b37d78d85d6"
+        }
+      ],
+      "destination": "/attente.html",
+      "permanent": false
+    },
+    {
+      "source": "/index.html",
+      "missing": [
+        {
+          "type": "cookie",
+          "key": "ksn_acces",
+          "value": "035a65c965e9f7ba23844583c8ed054a7dee4109028ca0dca8275b37d78d85d6"
+        }
+      ],
+      "destination": "/attente.html",
+      "permanent": false
+    },
+    {
+      "source": "/ksn.html",
+      "missing": [
+        {
+          "type": "cookie",
+          "key": "ksn_acces",
+          "value": "035a65c965e9f7ba23844583c8ed054a7dee4109028ca0dca8275b37d78d85d6"
+        }
+      ],
+      "destination": "/attente.html",
+      "permanent": false
+    },
+    {
+      "source": "/reseau.html",
+      "missing": [
+        {
+          "type": "cookie",
+          "key": "ksn_acces",
+          "value": "035a65c965e9f7ba23844583c8ed054a7dee4109028ca0dca8275b37d78d85d6"
+        }
+      ],
+      "destination": "/attente.html",
+      "permanent": false
+    },
+    {
+      "source": "/actus.html",
+      "missing": [
+        {
+          "type": "cookie",
+          "key": "ksn_acces",
+          "value": "035a65c965e9f7ba23844583c8ed054a7dee4109028ca0dca8275b37d78d85d6"
+        }
+      ],
+      "destination": "/attente.html",
+      "permanent": false
+    },
+    {
+      "source": "/nous-rejoindre.html",
+      "missing": [
+        {
+          "type": "cookie",
+          "key": "ksn_acces",
+          "value": "035a65c965e9f7ba23844583c8ed054a7dee4109028ca0dca8275b37d78d85d6"
+        }
+      ],
+      "destination": "/attente.html",
+      "permanent": false
+    },
+    {
+      "source": "/newsletter.html",
+      "missing": [
+        {
+          "type": "cookie",
+          "key": "ksn_acces",
+          "value": "035a65c965e9f7ba23844583c8ed054a7dee4109028ca0dca8275b37d78d85d6"
+        }
+      ],
+      "destination": "/attente.html",
+      "permanent": false
+    },
+    {
+      "source": "/contact.html",
+      "missing": [
+        {
+          "type": "cookie",
+          "key": "ksn_acces",
+          "value": "035a65c965e9f7ba23844583c8ed054a7dee4109028ca0dca8275b37d78d85d6"
+        }
+      ],
+      "destination": "/attente.html",
+      "permanent": false
+    }
   ]
 }
