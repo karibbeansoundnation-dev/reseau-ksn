@@ -7,7 +7,7 @@
 // (ex : 596696123456 pour un mobile Martinique). REMPLACER :
 const KSN_WHATSAPP = "596696000000";
 // Adresse qui reçoit les inscriptions à la newsletter :
-const KSN_EMAIL = "contact@karibbeansoundnation.com";
+const KSN_EMAIL = "contact@reseau-ksn.fr";
 // ------------------------------------------------------------
 
 // Préférence « réduire les animations » (lue une seule fois, en tête de fichier)
