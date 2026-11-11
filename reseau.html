@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#042F35">
+<title>Le Réseau — Annuaire des membres | KSN</title>
+<meta name="description" content="L'annuaire des professionnel·les de la musique caribéenne membres de KSN : artistes, producteurs, managers, techniciens, organisateurs sur 3 territoires.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=20261111h">
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="index.html">
+      <img src="assets/logo-mark-120-light.png" width="45" height="42" alt="Logo KSN">
+      <span class="brand-name">KSN<span class="brand-sub">Karibbean Sound Nation</span></span>
+    </a>
+    <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu">☰</button>
+    <nav>
+      <ul id="menu">
+        <li><a href="reseau.html">Le Réseau</a></li>
+        <li><a href="actus.html">Actus &amp; Agenda</a></li>
+        <li><a href="newsletter.html">Newsletter</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a class="btn-nav" href="nous-rejoindre.html">Nous rejoindre</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="hero hero--compact">
+  <img class="hero-spiral" src="assets/logo-mark-light.png" alt="">
+  <div class="container hero-inner">
+    <p class="eyebrow">Le réseau</p>
+    <h1>170+ professionnel·les, <em>3 territoires</em>, une filière</h1>
+    <p class="lead">Artistes, producteur·rices, managers, technicien·nes, organisateur·rices, médias… L'annuaire des membres KSN, par métier et par territoire.</p>
+  </div>
+</div>
+
+<section class="sec-flush">
+  <div class="container">
+    <p class="eyebrow">Annuaire des membres</p>
+    <h2>Trouver un·e pro</h2>
+    <p style="max-width:66ch;margin-bottom:.4rem">Chaque membre dispose d'une fiche professionnelle visible par les partenaires et les institutions : c'est ici qu'ils viennent chercher les talents de la filière.</p>
+
+    <div class="filters">
+      <input id="f-search" type="search" placeholder="Rechercher un nom…" autocomplete="off" autocapitalize="none" enterkeyhint="search">
+      <select id="f-metier">
+        <option value="">Tous les métiers</option>
+        <option>Artiste</option>
+        <option>Producteur·rice / Label</option>
+        <option>Manager / Éditeur·rice</option>
+        <option>Technicien·ne</option>
+        <option>Organisateur·rice</option>
+        <option>Média / Entrepreneur·e</option>
+      </select>
+      <select id="f-territoire">
+        <option value="">Tous les territoires</option>
+        <option>Martinique</option>
+        <option>Guadeloupe</option>
+        <option>Guyane</option>
+        <option>Paris / Hexagone</option>
+        <option>Canada</option>
+        <option>International</option>
+      </select>
+    </div>
+
+    <div class="grid-3 swipe">
+      <!-- MEMBRES : cartes d'exemple à remplacer par les vraies fiches.
+           Modèle : dupliquer une carte, changer data-metier / data-territoire et le contenu. -->
+      <div class="card membre-card" data-metier="Artiste" data-territoire="Martinique">
+        <b>Fiche membre (exemple)</b>
+        <p class="role">Artiste</p>
+        <p class="terr">Martinique</p>
+        <p>Bio courte du membre, style musical, projets en cours.</p>
+        <a class="btn btn-sm btn-outline membre-cta" href="nous-rejoindre.html">Adhérer pour contacter</a>
+      </div>
+      <div class="card membre-card" data-metier="Producteur·rice / Label" data-territoire="Guadeloupe">
+        <b>Fiche membre (exemple)</b>
+        <p class="role">Producteur·rice / Label</p>
+        <p class="terr">Guadeloupe</p>
+        <p>Bio courte du membre, catalogue, artistes accompagnés.</p>
+        <a class="btn btn-sm btn-outline membre-cta" href="nous-rejoindre.html">Adhérer pour contacter</a>
+      </div>
+      <div class="card membre-card" data-metier="Manager / Éditeur·rice" data-territoire="Paris / Hexagone">
+        <b>Fiche membre (exemple)</b>
+        <p class="role">Manager / Éditeur·rice</p>
+        <p class="terr">Paris / Hexagone</p>
+        <p>Bio courte du membre, roster, expertise.</p>
+        <a class="btn btn-sm btn-outline membre-cta" href="nous-rejoindre.html">Adhérer pour contacter</a>
+      </div>
+    </div>
+
+    <!-- Compteur : 170 membres référencés sur un objectif de 200 (chiffres de la campagne d'adhésion 2026).
+         Pour changer : data-count et le texte du premier <b>, le texte du second <b>, et --p (= référencés ÷ objectif). -->
+    <div class="card build">
+      <h3>L'annuaire complet se construit</h3>
+      <div class="build-figures">
+        <p class="build-fig"><b data-count="170">170+</b><span>membres référencés</span></p>
+        <p class="build-fig build-goal"><b>200</b><span>objectif</span></p>
+      </div>
+      <div class="build-bar" style="--p:85%" role="img" aria-label="170 membres référencés sur un objectif de 200"><span></span></div>
+      <a class="btn btn-primary" href="nous-rejoindre.html">Rejoindre KSN</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="grid-2">
+      <div>
+        <p class="eyebrow">Cartographie</p>
+        <h2>Environ 8&nbsp;000 structures musicales caribéennes recensées</h2>
+        <p>KSN cartographie l'écosystème musical du bassin Antilles-Guyane : labels, studios, salles, festivals, écoles, médias. La carte interactive sera publiée sur cette page.</p>
+      </div>
+      <div>
+        <p class="eyebrow">La communauté</p>
+        <h2>Le réseau au quotidien</h2>
+        <p style="margin-bottom:1rem"><strong>Communauté ouverte</strong> — un espace WhatsApp gratuit pour suivre l'actualité de la filière et se connecter.</p>
+        <p><strong>Canaux par métier</strong> — managers, artistes, technicien·nes, labels… des échanges plus ciblés et plus francs, entre pairs. Rejoignez la communauté pour y accéder.</p>
+        <a class="btn btn-primary" style="margin-top:1.2rem" href="nous-rejoindre.html">Nous rejoindre</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="piliers">
+  <div class="container">
+    <p class="eyebrow">Nos trois piliers</p>
+    <h2>Ce que nous faisons</h2>
+    <div class="grid-3 swipe" style="margin-top:2rem">
+      <div class="card cream pillar">
+        <span class="num">I</span>
+        <h3>Transmission</h3>
+        <p>Former et professionnaliser : webinaires « Le monde de la musique décrypté », interventions en lycées, Bourse KSN (2028).</p>
+      </div>
+      <div class="card cream pillar">
+        <span class="num">II</span>
+        <h3>Connexion</h3>
+        <p>Relier les acteur·rices de la filière : annuaire, communauté active, tour territorial Ka Rasanblé, cartographie caribéenne.</p>
+      </div>
+      <div class="card cream pillar">
+        <span class="num">III</span>
+        <h3>Rayonnement</h3>
+        <p>Faire briller la scène caribéenne : Music Week, plaidoyer institutionnel, export et visibilité internationale.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="container">
+    <div>
+      <h2>Votre place est dans le réseau</h2>
+      <p style="margin-top:.6rem">Ouvert à tou·tes les professionnel·les de la filière.</p>
+    </div>
+    <a class="btn btn-gold" href="nous-rejoindre.html">Nous rejoindre</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div>
+      <img src="assets/logo-ksn-300-light.png" width="74" height="74" alt="KSN — Karibbean Sound Nation">
+      <p>Le réseau professionnel de l'industrie musicale antillo-guyanaise.<br>La voix de la filière musicale caribéenne.</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="ksn.html">Le projet KSN</a></li>
+        <li><a href="reseau.html">Le réseau</a></li>
+        <li><a href="actus.html">Actus &amp; agenda</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Participer</h4>
+      <ul>
+        <li><a href="nous-rejoindre.html">Nous rejoindre</a></li>
+        <li><a href="newsletter.html">Newsletter</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="contact.html">Nous écrire</a></li>
+        <li><a href="mailto:contact@karibbeansoundnation.com">contact@karibbeansoundnation.com</a></li>
+        <li>Martinique · Guadeloupe · Guyane · Paris</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">© 2026 Karibbean Sound Nation — Association loi 1901 · <a href="#">Mentions légales</a></div>
+</footer>
+
+<script src="js/main.js?v=20261111c"></script>
+</body>
+</html>

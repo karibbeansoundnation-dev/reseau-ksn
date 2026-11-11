@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 560" preserveAspectRatio="xMaxYMid slice">
+  <defs>
+    <linearGradient id="a" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0F6B75"/>
+      <stop offset="1" stop-color="#075560"/>
+    </linearGradient>
+  </defs>
+  <!-- masses pétrole, en haut à droite -->
+  <path d="M1010 0 C1085 75 1190 112 1290 122 C1372 132 1422 192 1440 252 L1440 0 Z" fill="url(#a)" opacity=".62"/>
+  <path d="M1215 0 C1262 42 1342 72 1440 102 L1440 0 Z" fill="#0C6270" opacity=".7"/>
+  <!-- masse en bas à droite -->
+  <path d="M1440 372 C1382 346 1292 384 1252 452 C1222 504 1248 560 1262 560 L1440 560 Z" fill="url(#a)" opacity=".55"/>
+  <!-- filets or -->
+  <path d="M1000 0 C1062 102 1172 152 1292 177 C1382 197 1426 242 1440 272" fill="none" stroke="#E3B567" stroke-width="2" stroke-linecap="round" opacity=".9"/>
+  <path d="M0 478 C100 446 212 474 284 560" fill="none" stroke="#E3B567" stroke-width="2" stroke-linecap="round" opacity=".75"/>
+</svg>

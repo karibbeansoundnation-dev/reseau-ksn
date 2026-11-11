@@ -1,0 +1,845 @@
+/* ============================================================
+   KSN — Karibbean Sound Nation
+   Identité des visuels KSN : vert pétrole profond, crème, or.
+   · titres en Anton compressée (typo d'origine du site), libellés en capitales espacées (DM Sans)
+   · filets or fins, encadrés à angles droits, formes organiques du logo
+   · l'or est le seul accent : aucune couleur chaude vive
+   · animé avec retenue : reveal au scroll, hovers, marquee, compteurs
+   ============================================================ */
+
+:root {
+  --ink: #062D32;          /* texte, fonds les plus sombres */
+  --teal: #05434A;         /* vert pétrole des visuels KSN */
+  --teal-deep: #042F35;    /* en-tête, pied de page */
+  --teal-mid: #17606B;
+  --gold: #E3B567;         /* or des visuels : sur fond sombre, boutons */
+  --gold-deep: #B08440;    /* filets et grands chiffres sur fond clair */
+  --gold-ink: #7A5A24;     /* texte or sur fond clair (5,4:1) */
+  --gold-pale: #F1E2BC;    /* fond des tags */
+  --cream: #FBF3E3;        /* texte sur fond sombre */
+  --pumice: #F3EAD6;       /* canevas de page */
+  --paper: #FAF4E4;        /* bande « Je veux… » */
+  --limestone: #FCF8EE;    /* cartes */
+  --muted: #5C6B6D;        /* textes secondaires (5,2:1 sur crème) */
+  --line: rgba(5, 67, 74, .28);
+  --display: "Anton", "Arial Narrow", sans-serif;   /* typo d'origine du site : titres, chiffres, marque */
+  --sans: "DM Sans", "Segoe UI", system-ui, sans-serif;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+
+  /* Contexte clair par défaut ; les zones sombres redéfinissent ces variables */
+  --on: var(--ink);        /* texte courant */
+  --head: var(--teal);     /* titres */
+  --edge: var(--teal);     /* filets, encadrés */
+  --edge-fg: var(--cream); /* texte posé sur un fond --edge */
+  --rule: var(--gold-deep);/* petit filet sous les titres */
+  --hov: var(--teal);      /* survol des boutons pleins */
+  --hov-fg: var(--cream);
+
+  --r-card: 22px;            /* cartes et tuiles : grands arrondis */
+  --r-btn: 999px;            /* boutons en pilule */
+  --r-tag: 999px;            /* étiquettes et puces en pilule */
+  --r-field: 14px;           /* champs de saisie : coins doux, pas en pilule (le champ texte est haut) */
+  --sec-y: 3.4rem;        /* respiration verticale d'une section (réduite sur mobile) */
+}
+.hero, .band, .band-gold, header, footer {
+  --on: var(--cream); --head: var(--cream); --edge: var(--gold); --edge-fg: var(--ink);
+  --rule: var(--gold); --hov: var(--cream); --hov-fg: var(--ink);
+}
+.band-gold.band-beige {
+  --on: var(--ink); --head: var(--teal); --edge: var(--teal); --edge-fg: var(--cream);
+  --rule: var(--gold-deep); --hov: var(--teal); --hov-fg: var(--cream);
+}
+[hidden] { display: none !important; }
+:focus-visible { outline: 3px solid var(--edge); outline-offset: 3px; }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%; text-size-adjust: 100%;   /* iPhone : pas de zoom auto du texte en paysage */
+  -webkit-tap-highlight-color: rgba(227, 181, 103, .28);
+}
+body {
+  font-family: var(--sans);
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--pumice);
+  line-height: 1.6;
+  font-size: 1rem;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--ink); }
+
+/* Titres : Anton compressée, capitales, petit filet or dessous (h1 et h2) */
+h1, h2, h3 {
+  font-family: var(--display); font-weight: 400; text-transform: uppercase;
+  letter-spacing: .02em; line-height: .97;
+  color: var(--head); text-wrap: balance;
+}
+h1 { font-size: clamp(2.6rem, 7vw, 6rem); line-height: .96; }
+h2 { font-size: clamp(2.2rem, 5.5vw, 3.8rem); margin-bottom: 1.2rem; }
+h3 { font-size: clamp(1.35rem, 2.4vw, 1.8rem); margin-bottom: .5rem; line-height: 1.05; }
+h2::after, .hero h1::after {
+  content: ""; display: block; width: 3.6rem; height: 2px;
+  background: var(--rule); margin-top: 1.1rem;
+}
+
+/* Eyebrow : encadré fin à angles droits, capitales très espacées (comme « EN NOVEMBRE ») */
+.eyebrow {
+  display: inline-block; max-width: 100%;
+  color: var(--on); background: transparent;
+  font-size: .72rem; font-weight: 500; text-transform: uppercase;
+  letter-spacing: .22em; line-height: 1.5; padding: .55rem 1.1rem;
+  border: 1.5px solid var(--edge); border-radius: 0;
+  margin-bottom: 1.4rem;
+}
+
+.container {
+  max-width: 1280px; margin: 0 auto;
+  /* env() : respecte l'encoche de l'iPhone en mode paysage */
+  padding-left: max(1.5rem, env(safe-area-inset-left));
+  padding-right: max(1.5rem, env(safe-area-inset-right));
+}
+section { padding: var(--sec-y) 0; }
+.sec-flush { padding-bottom: 0; }   /* la section suivante apporte déjà sa respiration du haut */
+
+/* ---------- En-tête : bandeau vert pétrole, filet or ---------- */
+header {
+  background: var(--teal-deep); position: sticky; top: 0; z-index: 50;
+  padding-top: env(safe-area-inset-top);
+  border-bottom: 1px solid rgba(227, 181, 103, .45);
+}
+.nav {
+  max-width: 1280px; margin: 0 auto; padding: .65rem max(1.5rem, env(safe-area-inset-right)) .65rem max(1.5rem, env(safe-area-inset-left));
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+}
+.brand { display: flex; align-items: center; gap: .75rem; text-decoration: none; }
+.brand img { height: 42px; width: auto; transition: transform .6s var(--ease-out); }
+@media (hover: hover) { .brand:hover img { transform: rotate(180deg); } }
+.brand-name {
+  font-family: var(--display); font-weight: 400; font-size: 1.45rem; color: var(--cream);
+  letter-spacing: .06em; line-height: 1;
+}
+.brand-sub {
+  display: block; margin-top: .45rem; font-family: var(--sans); font-size: .5rem; font-weight: 500;
+  letter-spacing: .3em; text-transform: uppercase; color: var(--gold);
+}
+nav ul { list-style: none; display: flex; gap: .3rem; align-items: center; }
+nav a {
+  text-decoration: none; color: var(--cream);
+  font-size: .78rem; font-weight: 500; text-transform: uppercase; letter-spacing: .14em;
+  padding: .5rem .85rem; border-radius: var(--r-btn); white-space: nowrap;
+  transition: color .2s, box-shadow .2s;
+}
+/* Entre 901 et 1100 px : liens un peu resserrés pour que « Nous rejoindre » tienne sur une ligne */
+@media (min-width: 901px) and (max-width: 1100px) {
+  nav ul { gap: .1rem; }
+  nav a { padding: .5rem .55rem; letter-spacing: .1em; }
+  .btn-nav { padding: .55rem .9rem !important; }
+}
+@media (hover: hover) { nav a:hover { color: var(--gold); } }
+nav a.active { color: var(--gold); box-shadow: inset 0 -2px 0 var(--gold); border-radius: 0; }
+.btn-nav {
+  background: var(--gold); color: var(--ink) !important;
+  padding: .55rem 1.2rem !important; font-weight: 700;
+  border: 1.5px solid var(--gold); border-radius: var(--r-btn) !important;
+}
+.btn-nav.active { background: var(--cream); color: var(--ink) !important; box-shadow: none; }
+@media (hover: hover) { .btn-nav:hover { background: var(--cream); color: var(--ink) !important; border-color: var(--cream); } }
+.burger {
+  display: none; background: none; color: var(--cream); cursor: pointer;
+  border: 1px solid rgba(227, 181, 103, .6); border-radius: var(--r-btn); font-size: 1.5rem;
+}
+
+/* ---------- Boutons : capitales espacées, angles droits ---------- */
+.btn {
+  display: inline-block; text-decoration: none; cursor: pointer;
+  font-family: var(--sans); font-weight: 700; font-size: .8rem;
+  text-transform: uppercase; letter-spacing: .16em; line-height: 1.4;
+  background: var(--gold); color: var(--ink);
+  border-radius: var(--r-btn); padding: .95rem 1.7rem;
+  border: 1.5px solid var(--gold-deep);
+  transition: translate .15s var(--ease-out), background .2s, color .2s, border-color .2s;
+}
+@media (hover: hover) { .btn:hover { background: var(--hov); color: var(--hov-fg); border-color: var(--hov); translate: 0 -2px; } }
+.btn:active { translate: 0 1px; }
+.btn-outline { background: transparent; color: var(--on); border-color: var(--edge); }
+@media (hover: hover) { .btn-outline:hover { background: var(--edge); color: var(--edge-fg); border-color: var(--edge); } }
+.btn-sm { padding: .65rem 1.1rem; font-size: .72rem; }
+
+/* ---------- Hero : vert pétrole, formes et filets des visuels KSN, logo en surbrillance ---------- */
+.hero {
+  background: var(--teal) url("../assets/deco-hero.svg") right center / cover no-repeat;
+  color: var(--on);
+  padding: 3rem 0 3.6rem; position: relative; overflow: hidden;
+}
+.hero h1 { max-width: 16ch; }
+.hero h1.h1-wide { max-width: none; }   /* accueil : 3 lignes voulues (sauts de ligne dans le HTML) */
+.hero h1 em { font-style: normal; color: var(--gold); }
+.hero p.lead {
+  max-width: 52ch; font-size: 1.15rem; margin: 1.6rem 0 2.2rem;
+  color: rgba(251, 243, 227, .88);
+}
+/* Logo spirale à droite, en surbrillance dorée, sans bloc de fond */
+.hero-spiral {
+  position: absolute; right: 2.5vw; top: 50%; transform: translateY(-50%);
+  width: clamp(220px, 22vw, 320px); pointer-events: none; z-index: 1;
+  filter: drop-shadow(0 0 20px rgba(227, 181, 103, .5)) drop-shadow(0 0 54px rgba(227, 181, 103, .32));
+  animation: floaty 7s ease-in-out infinite;
+}
+.hero-inner { position: relative; z-index: 2; }
+@media (min-width: 641px) {
+  /* le texte s'arrête avant le logo */
+  .hero-inner { padding-right: calc(clamp(220px, 22vw, 320px) + 3vw); }
+}
+/* Sans paragraphe d'intro (accueil) : les boutons suivent directement le titre */
+.hero h1 + .btn { margin-top: 2rem; }
+.hero .btn + .btn { margin-left: 1rem; }
+/* Hero avec chapeau (page « Le réseau ») : sous le texte, la même marge qu'au-dessus du premier titre de la page */
+.hero.hero--compact { padding-bottom: var(--sec-y); }
+.hero.hero--compact p.lead { margin-bottom: 0; }
+
+@keyframes floaty-m { 0%, 100% { transform: translateY(-5px); } 50% { transform: translateY(5px); } }
+@keyframes floaty {
+  0%, 100% { transform: translateY(calc(-50% - 10px)); }
+  50% { transform: translateY(calc(-50% + 10px)); }
+}
+
+/* ---------- Marquee défilant : bandeau or ---------- */
+.marquee {
+  background: var(--gold); color: var(--ink);
+  overflow: hidden; white-space: nowrap; padding: .8rem 0;
+  border-block: 1px solid var(--teal-deep);
+}
+.marquee-track {
+  display: inline-block; white-space: nowrap;
+  animation: marquee 40s linear infinite;
+}
+@media (hover: hover) { .marquee:hover .marquee-track { animation-play-state: paused; } }
+.marquee-track span {
+  font-family: var(--display); font-weight: 400; text-transform: uppercase;
+  font-size: clamp(1.3rem, 2.6vw, 2rem); letter-spacing: .04em;
+  padding-right: 1rem;
+}
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ---------- Chiffres clés : cartes pétrole, chiffres or ---------- */
+.stats { background: var(--pumice); padding: 3rem 0 2rem; }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.stat {
+  background: var(--teal); color: var(--cream);
+  border-radius: var(--r-card); padding: 2.1rem 1.8rem;
+  border: 1px solid var(--gold);
+  transition: translate .2s var(--ease-out), box-shadow .2s var(--ease-out), background .25s;
+}
+@media (hover: hover) { .stat:hover { translate: 0 -4px; box-shadow: 0 16px 30px -14px rgba(4, 47, 53, .55); } }
+.stat b {
+  font-family: var(--display); font-weight: 400; font-size: clamp(3rem, 6vw, 5rem);
+  color: var(--gold); display: block; line-height: 1; margin-bottom: .6rem;
+}
+.stat span { font-size: .78rem; font-weight: 500; text-transform: uppercase; letter-spacing: .16em; color: rgba(251, 243, 227, .9); }
+/* Une carte sur quatre en or */
+.stats-grid .stat:nth-child(2) { background: var(--gold); border-color: var(--gold-deep); color: var(--ink); }
+.stats-grid .stat:nth-child(2) b { color: var(--teal); }
+.stats-grid .stat:nth-child(2) span { color: var(--ink); }
+
+/* ---------- Cartes : crème, filet fin, elles se soulèvent au survol ---------- */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.6rem; }
+.card {
+  background: var(--limestone); border-radius: var(--r-card); padding: 2.2rem;
+  border: 1px solid var(--line);
+  transition: translate .2s var(--ease-out), box-shadow .2s var(--ease-out), border-color .25s, background .25s, color .25s;
+}
+@media (hover: hover) { .card:hover { translate: 0 -4px; border-color: var(--teal); box-shadow: 0 18px 32px -16px rgba(4, 47, 53, .4); } }
+.card.petrol { --head: var(--cream); background: var(--teal); color: rgba(251, 243, 227, .9); border-color: var(--gold); }
+.tag {
+  display: inline-block; background: var(--gold-pale); color: var(--gold-ink);
+  font-size: .68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .16em; padding: .3rem .75rem; border-radius: var(--r-tag);
+  border: 1px solid var(--gold-deep); margin-bottom: .8rem;
+}
+
+/* Lien « Lire → » en pied de carte */
+.more {
+  display: inline-flex; align-items: center; min-height: 44px; margin-top: .4rem;
+  font-size: .76rem; font-weight: 700; text-transform: uppercase; letter-spacing: .14em;
+  color: var(--teal); text-decoration: underline; text-decoration-color: var(--gold-deep);
+  text-decoration-thickness: 2px; text-underline-offset: 6px;
+}
+@media (hover: hover) { a.more:hover { color: var(--gold-ink); } }
+
+/* ---------- Liste éditoriale « Je veux… » ---------- */
+.seeking { background: var(--paper); color: var(--teal); }
+.seeking-eyebrow {
+  font-size: .72rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .24em; color: var(--gold-ink); margin-bottom: .8rem;
+}
+.seeking-title {
+  font-family: var(--display); font-weight: 400; text-transform: uppercase;
+  color: var(--teal); letter-spacing: .02em; line-height: .97;
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem); margin-bottom: 2.2rem;
+}
+.seeking-title::after { content: ""; display: block; width: 3.6rem; height: 2px; background: var(--gold-deep); margin-top: 1.1rem; }
+.seeking-list { list-style: none; margin: 0; padding: 0; border-top: 1.5px solid var(--teal); }
+.seek-item { border-bottom: 1.5px solid var(--teal); }
+
+/* La ligne entière est cliquable */
+.seek {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center;
+  gap: clamp(1rem, 3vw, 2.4rem); padding: clamp(1.3rem, 2.6vw, 2rem) clamp(1rem, 2.4vw, 1.8rem);
+  text-decoration: none; color: var(--teal); background: transparent;
+  transition: background .35s var(--ease-out), color .35s var(--ease-out);
+}
+.seek-num {
+  font-family: var(--display); font-weight: 400; color: var(--gold-ink);
+  font-size: clamp(1.6rem, 3.4vw, 2.4rem); line-height: 1; letter-spacing: .04em;
+  transition: color .35s var(--ease-out);
+}
+.seek-body { display: flex; flex-direction: column; gap: .3rem; }
+.seek-name {
+  font-family: var(--display); font-weight: 400; text-transform: uppercase;
+  letter-spacing: .02em; line-height: 1.02; color: inherit;
+  font-size: clamp(1.5rem, 3.6vw, 2.6rem);
+}
+.seek-desc { font-size: clamp(.92rem, 1.1vw, 1.05rem); color: var(--muted); transition: color .35s var(--ease-out); }
+.seek-arrow {
+  width: clamp(44px, 4.2vw, 56px); height: clamp(44px, 4.2vw, 56px); flex: none;
+  border-radius: 50%; border: 1.5px solid currentColor;
+  display: grid; place-items: center; color: inherit;
+  transition: background .35s var(--ease-out), color .35s var(--ease-out),
+              border-color .35s var(--ease-out), transform .35s var(--ease-out);
+}
+.seek-arrow svg { width: 46%; height: 46%; }
+
+/* Ligne mise en avant (01) + état survolé : fond pétrole, texte crème, or */
+.seek--featured,
+.seek:hover,
+.seek:focus-visible {
+  background: var(--teal); color: var(--cream);
+}
+.seek--featured .seek-desc,
+.seek:hover .seek-desc,
+.seek:focus-visible .seek-desc { color: rgba(251, 243, 227, .85); }
+.seek--featured .seek-num,
+.seek:hover .seek-num,
+.seek:focus-visible .seek-num { color: var(--gold); }
+.seek--featured .seek-arrow,
+.seek:hover .seek-arrow,
+.seek:focus-visible .seek-arrow {
+  background: var(--gold); border-color: var(--gold); color: var(--teal);
+}
+.seek:hover .seek-arrow, .seek:focus-visible .seek-arrow { transform: translateX(6px); }
+.seek:focus-visible { outline: 3px solid var(--gold); outline-offset: -3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .seek, .seek-num, .seek-desc, .seek-arrow { transition: none; }
+}
+
+/* ---------- Bandeaux pleine largeur ---------- */
+.band, .band-gold {
+  background: var(--teal) url("../assets/deco-band.svg") right center / cover no-repeat;
+  color: rgba(251, 243, 227, .9);
+}
+.band .container, .band-gold .container {
+  display: flex; flex-wrap: wrap; align-items: center;
+  justify-content: space-between; gap: 1.6rem; text-align: left;
+}
+.band h2, .band-gold h2 { margin-bottom: .6rem; }
+.band .eyebrow { margin-bottom: 1rem; }
+.band p { max-width: 56ch; }
+.band .btn, .band-gold .btn { flex-shrink: 0; margin: 0; }
+.band > .container > div:first-child, .band-gold > .container > div:first-child { flex: 1 1 480px; }
+.band-gold p { max-width: 52ch; margin: 0 !important; }
+.band-gold .ksn-form { flex: 0 1 460px; margin: 0; }
+/* Variante claire (accueil) : fond crème pour alterner avec le bandeau sombre au-dessus */
+.band-gold.band-beige { background: var(--pumice); color: var(--ink); }
+
+/* ---------- Piliers ---------- */
+.pillar { text-align: left; padding: 2.2rem; }
+.pillar .num {
+  font-family: var(--display); font-weight: 400; font-size: 1.1rem; color: var(--gold);
+  background: var(--teal); width: 48px; height: 48px; border-radius: var(--r-btn);
+  display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1.1rem;
+  transition: background .25s, color .25s;
+}
+@media (hover: hover) { .pillar:hover .num { background: var(--gold); color: var(--teal); } }
+
+/* ---------- Listes stylées ---------- */
+.check { list-style: none; }
+.check li { padding-left: 1.7rem; position: relative; margin-bottom: .6rem; }
+.check li::before { content: "→"; position: absolute; left: 0; color: var(--gold-ink); font-weight: 700; }
+
+/* ---------- Timeline ---------- */
+.timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; margin-top: 2rem; }
+.tl-item {
+  background: var(--limestone); border-radius: var(--r-card); padding: 2rem;
+  border: 1px solid var(--line);
+  transition: translate .2s var(--ease-out), box-shadow .2s var(--ease-out), border-color .25s, background .25s;
+}
+@media (hover: hover) { .tl-item:hover { translate: 0 -4px; border-color: var(--teal); box-shadow: 0 18px 32px -16px rgba(4, 47, 53, .4); } }
+.tl-item .year {
+  font-family: var(--display); font-weight: 400; font-size: clamp(2.6rem, 5vw, 4rem);
+  color: var(--gold-deep); line-height: 1; margin: .3rem 0 .7rem;
+}
+.tl-item .verb {
+  display: inline-block; background: var(--gold-pale); color: var(--gold-ink); border-radius: var(--r-tag);
+  border: 1px solid var(--gold-deep);
+  padding: .26rem .8rem; text-transform: uppercase; letter-spacing: .16em;
+  font-size: .68rem; font-weight: 700;
+}
+
+/* ---------- Équipe ---------- */
+.team { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; }
+.member {
+  text-align: center; background: var(--limestone); border-radius: var(--r-card);
+  border: 1px solid var(--line);
+  padding: 2rem 1.2rem; transition: translate .2s var(--ease-out), box-shadow .2s var(--ease-out), border-color .25s;
+}
+@media (hover: hover) { .member:hover { translate: 0 -4px; border-color: var(--teal); box-shadow: 0 18px 32px -16px rgba(4, 47, 53, .4); } }
+.member .avatar {
+  width: 110px; height: 110px; margin: 0 auto .9rem; border-radius: 50%;
+  background: linear-gradient(145deg, var(--teal), var(--teal-mid));
+  border: 2px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-weight: 400; font-size: 1.7rem; color: var(--gold);
+  transition: transform .4s var(--ease-out);
+}
+@media (hover: hover) { .member:hover .avatar { transform: scale(1.06); } }
+.member b { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 1.05rem; letter-spacing: .03em; color: var(--teal); display: block; line-height: 1.25; margin-bottom: .2rem; }
+.member span { font-size: .72rem; font-weight: 500; text-transform: uppercase; letter-spacing: .18em; color: var(--gold-ink); }
+
+/* ---------- Annuaire ---------- */
+.filters { display: flex; gap: .7rem; flex-wrap: wrap; margin: 1.6rem 0 2.2rem; }
+.filters select, .filters input {
+  font-family: var(--sans); font-weight: 500; font-size: 1rem;   /* 16 px mini : évite le zoom auto d'iOS au focus */
+  padding: .75rem 1.3rem; border-radius: var(--r-field);
+  border: 1.5px solid var(--teal); background: var(--limestone); color: var(--ink);
+  transition: background .2s, box-shadow .2s;
+}
+@media (hover: hover) { .filters select:hover { background: #fff; } }
+.filters input:focus, .filters select:focus { background: #fff; outline: none; box-shadow: 0 0 0 3px rgba(227, 181, 103, .6); }
+.filters input { -webkit-appearance: none; appearance: none; }
+.membre-card b { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 1.15rem; letter-spacing: .03em; color: var(--teal); }
+.membre-card .role { display: inline-block; background: var(--gold-pale); color: var(--gold-ink); border-radius: var(--r-tag); border: 1px solid var(--gold-deep); padding: .2rem .7rem; font-size: .66rem; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; margin: .3rem 0; }
+.membre-card .terr { font-size: .85rem; color: var(--muted); }
+.membre-cta { margin-top: 1rem; }
+
+/* Annuaire en construction : compteur de membres référencés et jauge vers l'objectif */
+.build { margin-top: 2rem; text-align: center; }
+.build h3 { margin-bottom: 1.4rem; }
+.build-figures {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem;
+  max-width: 34rem; margin: 0 auto 1rem; text-align: left;
+}
+.build-fig { display: flex; flex-direction: column; gap: .4rem; }
+.build-goal { text-align: right; }
+.build-fig b {
+  font-family: var(--display); font-weight: 400; line-height: 1;
+  font-size: clamp(3.2rem, 9vw, 4.8rem); color: var(--teal);
+}
+.build-goal b { color: var(--gold-ink); }
+.build-fig span { font-size: .74rem; font-weight: 500; text-transform: uppercase; letter-spacing: .16em; color: var(--muted); }
+.build-bar {
+  max-width: 34rem; height: 14px; margin: 0 auto 1.8rem;
+  border: 1px solid var(--teal); border-radius: var(--r-btn); background: rgba(5, 67, 74, .07);
+  padding: 2px;
+}
+.build-bar span {
+  display: block; height: 100%; width: var(--p, 0%); background: var(--gold-deep); border-radius: inherit;
+  transition: width 1.6s var(--ease-out) .25s;
+}
+.reveal:not(.visible) .build-bar span { width: 0; }   /* la jauge se remplit à l'apparition (pleine si pas d'animation) */
+
+/* ---------- Formulaires : champs à filet pétrole, halo or au focus ---------- */
+form.ksn-form { display: grid; gap: 1rem; max-width: 640px; }
+form.ksn-form label {
+  font-weight: 700; color: var(--on);
+  font-size: .72rem; text-transform: uppercase; letter-spacing: .18em;
+}
+form.ksn-form input, form.ksn-form select, form.ksn-form textarea {
+  width: 100%; padding: .9rem 1.2rem; border-radius: var(--r-field); margin-top: .4rem;
+  border: 1.5px solid var(--teal); font-family: var(--sans); font-weight: 500;
+  font-size: 1rem; background: var(--limestone); color: var(--ink);
+  transition: background .2s, border-color .2s, box-shadow .2s;
+}
+form.ksn-form textarea { padding: 1rem 1.2rem; min-height: 110px; }
+form.ksn-form input:focus, form.ksn-form select:focus, form.ksn-form textarea:focus {
+  outline: none; background: #fff; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(227, 181, 103, .7);
+}
+/* iOS : retire l'ombre interne et les coins arrondis par défaut des champs texte */
+form.ksn-form input, form.ksn-form textarea { -webkit-appearance: none; appearance: none; }
+
+/* ---------- Actus ---------- */
+.actu-date { font-size: .72rem; font-weight: 700; color: var(--muted); letter-spacing: .16em; text-transform: uppercase; }
+.badge {
+  display: inline-block; font-size: .66rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+  padding: .3rem .8rem; border-radius: var(--r-tag); margin-bottom: .6rem;
+  border: 1px solid var(--teal);
+}
+.badge.ksn { background: var(--gold); color: var(--ink); border-color: var(--gold-deep); }
+.badge.membres { background: var(--teal); color: var(--cream); }
+.badge.filiere { background: transparent; color: var(--teal); }
+
+/* Cartes d'actus : le lien « → » reste calé en bas, quelle que soit la longueur du texte */
+.news { display: flex; flex-direction: column; }
+.news .badge { align-self: flex-start; }
+.news p:not(.actu-date) { margin-bottom: .6rem; }
+.news .more { margin-top: auto; align-self: flex-start; }
+
+/* ---------- Filtres d'actualités (puces) ---------- */
+.chips { display: flex; flex-wrap: wrap; gap: .7rem; margin: 1.6rem 0 2.2rem; }
+.chip {
+  font-family: var(--sans); font-weight: 700; font-size: .74rem;
+  text-transform: uppercase; letter-spacing: .14em;
+  min-height: 44px; padding: .5rem 1.1rem; cursor: pointer;
+  background: transparent; color: var(--teal);
+  border: 1.5px solid var(--teal); border-radius: var(--r-tag);
+  transition: background .2s, color .2s, box-shadow .2s;
+}
+@media (hover: hover) { .chip:hover { background: var(--gold-pale); } }
+.chip[aria-pressed="true"] { background: var(--teal); color: var(--cream); box-shadow: inset 0 -3px 0 var(--gold); }
+
+/* ---------- Agenda : une carte par événement (grosse date · catégorie · titre · bouton) ---------- */
+.events { display: grid; gap: 1.4rem; margin-top: 1.6rem; }
+.event {
+  display: grid; grid-template-columns: 11rem 1fr auto; align-items: center; gap: 1.6rem;
+  background: var(--limestone); border-radius: var(--r-card); padding: 1.3rem 1.6rem;
+  border: 1px solid var(--line);
+  transition: translate .2s var(--ease-out), box-shadow .2s var(--ease-out), border-color .25s;
+}
+@media (hover: hover) { .event:hover { translate: 0 -4px; border-color: var(--teal); box-shadow: 0 18px 32px -16px rgba(4, 47, 53, .4); } }
+.event-date { display: flex; align-items: center; gap: .7rem; }
+.event-date b {
+  font-family: var(--display); font-weight: 400; font-size: 4.2rem; line-height: .9;
+  color: var(--teal);
+}
+.event-date span {
+  font-size: .7rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .14em; line-height: 1.5; color: var(--muted);
+}
+.event-date span em { display: block; font-style: normal; color: var(--gold-ink); }
+.event-date.soon b { font-size: 1.7rem; line-height: 1.1; text-transform: uppercase; color: var(--gold-ink); }
+.event .tag { margin-bottom: .5rem; }
+.event h3 { margin: 0 0 .25rem; }
+.event p { font-size: .92rem; color: var(--muted); }
+.event.past { background: transparent; border-style: dashed; }
+.event.past:hover { translate: none; box-shadow: none; }
+.event.past .event-date b { color: var(--muted); }
+
+/* ---------- Footer : vert pétrole profond, titres or ---------- */
+footer { background: var(--teal-deep); color: rgba(251, 243, 227, .78); padding: 3.2rem 0 calc(1.6rem + env(safe-area-inset-bottom)); margin-top: 3rem; border-top: 1px solid rgba(227, 181, 103, .45); }
+footer .container { display: grid; grid-template-columns: 2fr 1fr 1fr 1.4fr; gap: 2.4rem; }
+footer h4 {
+  font-family: var(--display); font-weight: 400; color: var(--gold);
+  font-size: 1.1rem; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 1rem;
+}
+footer a { color: var(--cream); text-decoration: none; transition: color .2s, padding-left .25s var(--ease-out); }
+@media (hover: hover) { footer a:hover { color: var(--gold); padding-left: 5px; } }
+footer ul { list-style: none; }
+footer li { margin-bottom: .55rem; }
+footer img { height: 112px; width: 112px; margin: -.6rem 0 .5rem -.6rem; }
+.foot-bottom {
+  max-width: 1280px; margin: 3rem auto 0; padding: 1.3rem 1.5rem 0;
+  border-top: 1px solid rgba(227, 181, 103, .3);
+  font-size: .78rem; font-weight: 500; text-align: center; color: rgba(251, 243, 227, .66);
+}
+.foot-bottom a { color: rgba(251, 243, 227, .8); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- Reveal au scroll (classes posées par main.js) ---------- */
+.reveal {
+  opacity: 0; transform: translateY(34px);
+  /* le décalage en cascade (--d) ne vaut que pour l'apparition, pas pour le survol */
+  transition: opacity .8s var(--ease-out) var(--d, 0s), transform .8s var(--ease-out) var(--d, 0s),
+              translate .2s var(--ease-out), scale .25s var(--ease-out), box-shadow .2s var(--ease-out), border-color .25s, background .25s, color .25s;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .grid-3, .team, .stats-grid, .timeline { grid-template-columns: repeat(2, 1fr); }
+  footer .container { grid-template-columns: 1fr 1fr; }
+  .event { grid-template-columns: 9rem 1fr; }
+  .event .btn { grid-column: 1 / -1; justify-self: start; }
+
+  /* Menu : 5 entrées, donc bouton menu dès 900 px (sinon la barre déborde sur tablette) */
+  nav ul {
+    display: none; position: absolute; top: calc(100% + .4rem); right: 1rem;
+    width: min(22rem, calc(100% - 2rem));
+    background: var(--teal); border-radius: var(--r-card); flex-direction: column;
+    border: 1px solid var(--gold); box-shadow: 0 20px 40px -14px rgba(0, 0, 0, .55);
+    padding: 1.2rem; gap: .5rem; align-items: stretch; text-align: center;
+  }
+  nav ul.open { display: flex; }
+  .burger {
+    width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; line-height: 1;
+  }
+  nav ul a { display: block; padding: .9rem 1rem; font-size: .85rem; }
+  .btn-nav { padding: .9rem 1rem !important; }
+}
+@media (max-width: 640px) {
+  .grid-2, .grid-3, .team, .stats-grid, .timeline { grid-template-columns: 1fr; }
+  footer .container { grid-template-columns: 1fr; }
+  .hero { padding: 3.5rem 0 4rem; }
+  :root { --sec-y: 2.4rem; }
+  .band .container, .band-gold .container { flex-direction: column; align-items: flex-start; }
+}
+
+/* ============================================================
+   iPhone / petits écrans (≤ 640 px) — placé en dernier pour l'emporter
+   ============================================================ */
+@media (max-width: 640px) {
+  .brand-sub { font-size: .6rem; letter-spacing: .22em; }
+  .eyebrow { font-size: .68rem; letter-spacing: .16em; padding: .5rem .9rem; }
+
+  /* Héro : le logo en surbrillance passe SOUS le texte et les boutons, à droite */
+  .hero {
+    padding: 1.8rem 0 8rem;
+    /* décor réduit aux coins : aucun filet ne traverse le texte */
+    background: url("../assets/deco-m-top.svg") right top / 100% auto no-repeat,
+                url("../assets/deco-m-bottom.svg") right bottom / 100% auto no-repeat, var(--teal);
+  }
+  .band, .band-gold { background: var(--teal) url("../assets/deco-m-top.svg") right top / 100% auto no-repeat; }
+  .band-gold.band-beige { background: var(--pumice); }
+  .hero-spiral {
+    width: 115px; right: 9vw; top: auto; bottom: 1.1rem; transform: none;
+    filter: drop-shadow(0 0 12px rgba(227, 181, 103, .55)) drop-shadow(0 0 30px rgba(227, 181, 103, .35));
+    animation: floaty-m 7s ease-in-out infinite;
+  }
+  .hero h1 + .btn { margin-top: 1.8rem; }
+  .hero p.lead { font-size: 1.05rem; margin: 1.4rem 0 1.8rem; }
+  .hero .btn { display: block; width: 100%; text-align: center; }
+  .hero .btn + .btn { margin: .75rem 0 0; }
+  /* Hero compact : plus de zone vide sous le texte ; la spirale passe en haut à droite, à hauteur du libellé,
+     et seul le décor du haut reste (aucun filet ne traverse le chapeau) */
+  .hero.hero--compact {
+    padding: 1.8rem 0 var(--sec-y);
+    background: url("../assets/deco-m-top.svg") right top / 100% auto no-repeat, var(--teal);
+  }
+  .hero--compact .hero-spiral {
+    width: 64px; top: 1.8rem; bottom: auto; right: max(1.5rem, 6vw);
+    filter: drop-shadow(0 0 10px rgba(227, 181, 103, .55)) drop-shadow(0 0 24px rgba(227, 181, 103, .35));
+  }
+
+  /* Chiffres clés en 2 colonnes (au lieu d'une pile de 4 grandes cartes) */
+  .stats { padding: 2rem 0 1rem; }
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: .7rem; }
+  .stat { padding: 1.4rem 1.1rem; }
+  .stat b { font-size: clamp(2.2rem, 11vw, 3rem); }
+  .stat span { font-size: .7rem; letter-spacing: .12em; }
+
+  /* Cartes plus compactes */
+  .card, .tl-item, .pillar { padding: 1.6rem; }
+  .team { grid-template-columns: 1fr 1fr; gap: .7rem; }
+  .member { padding: 1.4rem .8rem; }
+  .member .avatar { width: 84px; height: 84px; font-size: 1.3rem; }
+  .member b { font-size: .95rem; }
+
+  /* Bandeaux : empilés, boutons pleine largeur (flex-basis ne doit plus jouer sur la hauteur) */
+  .band .container, .band-gold .container { align-items: stretch; }
+  .band > .container > div:first-child, .band-gold > .container > div:first-child { flex: none; }
+  .band .container > .btn, .band-gold .container > .btn { text-align: center; }
+  .band-gold .ksn-form { flex: none; width: 100%; }
+
+  /* Agenda : date, puis titre, puis bouton pleine largeur */
+  .event { grid-template-columns: 1fr; gap: 1rem; padding: 1.2rem; }
+  .event-date b { font-size: 3.4rem; }
+  .event .btn { justify-self: stretch; text-align: center; }
+  .chips { gap: .5rem; }
+  .chip { padding: .5rem .75rem; font-size: .7rem; letter-spacing: .1em; }
+
+  /* Formulaires : champs hauts, filtres et boutons pleine largeur */
+  .filters select, .filters input { flex: 1 1 100%; }
+  form.ksn-form input, form.ksn-form select { min-height: 52px; }
+  form.ksn-form .btn { text-align: center; }
+
+  /* Liste « Je veux… » : numéro au-dessus du titre, flèche toujours à droite */
+  .seeking-title { margin-bottom: 1.5rem; }
+  .seek { grid-template-columns: 1fr auto; gap: .9rem 1rem; padding: 1.2rem .9rem; }
+  .seek-num { grid-column: 1; font-size: 1.1rem; letter-spacing: .12em; }
+  .seek-body { grid-column: 1; grid-row: 2; }
+  .seek-arrow { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+  .seek-name { font-size: 1.45rem; }
+  .seek-desc { font-size: .95rem; }
+
+  /* Zones tactiles : 44 px minimum partout (norme Apple) */
+  .brand { min-height: 44px; }
+  .btn-sm {
+    min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
+    padding: .6rem 1.2rem; font-size: .76rem;
+  }
+  .tag { font-size: .72rem; }
+  .badge, .membre-card .role { font-size: .72rem; }
+
+  /* Pied de page : zones tactiles de 44 px */
+  footer { padding-top: 2.2rem; margin-top: 2rem; }
+  footer a { display: inline-block; padding: .62rem 0; min-height: 44px; }
+  footer li { margin-bottom: 0; }
+  footer img { height: 96px; width: 96px; }
+  .foot-bottom a { display: inline-block; padding: .5rem .2rem; }
+}
+
+/* Écrans tactiles plus larges que 640 px (iPhone en paysage, iPad) : liens du menu à 44 px */
+@media (pointer: coarse) and (min-width: 641px) {
+  nav a { padding: .7rem .9rem; }
+  .btn-nav { padding: .7rem 1.3rem !important; }
+}
+
+/* Ancres (#newsletter, #fiche) : ne pas passer sous l'en-tête collant */
+section[id], .news[id] { scroll-margin-top: 5.5rem; }
+
+/* ============================================================
+   VERSION MOBILE — inspirée d'apple.com
+   Barre translucide, menu plein écran, grands arrondis, cartes à faire glisser,
+   liens textuels. Les couleurs, les typos et le ton restent ceux de KSN.
+   Placé tout en bas pour l'emporter sur le reste.
+   ============================================================ */
+.swipe-dots { display: none; }
+
+/* ---- Barre de navigation et menu (burger : jusqu'à 900 px) ---- */
+@media (max-width: 900px) {
+  /* Verre dépoli. Le flou est porté par un pseudo-élément : un backdrop-filter sur le header
+     lui-même ferait du menu plein écran (position: fixed) un enfant prisonnier de la barre. */
+  header { background: transparent; border-bottom: 0; }
+  header::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background: rgba(4, 47, 53, .78);
+    -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(227, 181, 103, .3);
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    header::before { background: rgba(4, 47, 53, .97); }
+  }
+  .nav { height: 54px; padding-top: 0; padding-bottom: 0; }
+  .brand img { height: 34px; }
+  /* La barre flotte au-dessus du héro (qui remonte dessous) : c'est ce qui rend le verre dépoli visible */
+  :root { --hdr: calc(54px + env(safe-area-inset-top)); }
+  header { margin-bottom: calc(-1 * var(--hdr)); }
+  .hero { padding-top: calc(3rem + var(--hdr)); }
+  .brand, .burger { position: relative; z-index: 2; }
+
+  /* Burger : deux traits qui se croisent en croix, sans cadre */
+  .burger {
+    width: 44px; height: 44px; font-size: 0; border: 0; border-radius: 50%; background: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .burger::before, .burger::after {
+    content: ""; position: absolute; left: 12px; right: 12px; height: 2px; border-radius: 2px;
+    background: var(--cream);
+    transition: top .35s var(--ease-out), transform .35s var(--ease-out);
+  }
+  .burger::before { top: 17px; }
+  .burger::after { top: 25px; }
+  .burger[aria-expanded="true"]::before { top: 21px; transform: rotate(45deg); }
+  .burger[aria-expanded="true"]::after { top: 21px; transform: rotate(-45deg); }
+
+  /* Menu : feuille plein écran, grands titres, apparition en cascade */
+  nav ul {
+    display: flex; position: fixed; inset: 0; z-index: 1;
+    width: auto; flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 0;
+    padding: calc(env(safe-area-inset-top) + 4.4rem) max(1.5rem, env(safe-area-inset-right))
+             calc(1.6rem + env(safe-area-inset-bottom)) max(1.5rem, env(safe-area-inset-left));
+    background: var(--teal-deep); border: 0; border-radius: 0; box-shadow: none; text-align: left;
+    overflow-y: auto; overscroll-behavior: contain;
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity .3s var(--ease-out), visibility 0s linear .3s;
+  }
+  nav ul.open { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity .3s var(--ease-out), visibility 0s; }
+  nav ul::after {   /* spirale très discrète en fond */
+    content: ""; position: absolute; right: -80px; bottom: 4%; width: 320px; height: 320px;
+    background: url("../assets/logo-mark-light.png") center / contain no-repeat; opacity: .07; pointer-events: none;
+  }
+  nav ul li {
+    border-bottom: 1px solid rgba(251, 243, 227, .14);
+    opacity: 0; transform: translateY(14px);
+    transition: opacity .45s var(--ease-out), transform .45s var(--ease-out);
+  }
+  nav ul.open li { opacity: 1; transform: none; }
+  nav ul.open li:nth-child(2) { transition-delay: .04s; }
+  nav ul.open li:nth-child(3) { transition-delay: .08s; }
+  nav ul.open li:nth-child(4) { transition-delay: .12s; }
+  nav ul.open li:nth-child(5) { transition-delay: .16s; }
+  nav ul a {
+    display: flex; align-items: center; min-height: 64px; padding: .4rem 0; border-radius: 0;
+    font-family: var(--display); font-weight: 400; font-size: clamp(1.9rem, 9vw, 2.6rem);
+    letter-spacing: .02em; line-height: 1; text-transform: uppercase; color: var(--cream);
+  }
+  nav a.active { color: var(--gold); box-shadow: none; }
+  nav ul li:last-child { border-bottom: 0; margin-top: 1.8rem; }
+  nav ul .btn-nav {
+    justify-content: center; min-height: 56px; padding: 0 1.5rem !important; border-radius: 999px !important;
+    font-family: var(--sans); font-weight: 700; font-size: .86rem; letter-spacing: .16em; color: var(--ink) !important;
+  }
+  html.menu-open, html.menu-open body { overflow: hidden; }
+}
+
+/* ---- Contenu : grands arrondis, boutons en pilule, cartes à faire glisser ---- */
+@media (max-width: 640px) {
+  /* Lecture : corps un peu plus grand, interligne posé (retour à 16 px sur les très petits écrans) */
+  body { font-size: 1.0625rem; line-height: 1.55; }
+  a[href^="mailto:"] { overflow-wrap: anywhere; }
+
+  /* Héro : remonte sous la barre translucide ; appel principal en pilule, appel secondaire en lien avec chevron */
+  .hero { padding-top: calc(1.8rem + var(--hdr)); }
+  .hero.hero--compact { padding-top: calc(1.8rem + var(--hdr)); }
+  .hero--compact .hero-spiral { top: calc(1.8rem + var(--hdr)); }
+  .hero p.lead { font-size: 1.15rem; line-height: 1.45; }
+  .hero .btn { min-height: 54px; display: flex; align-items: center; justify-content: center; }
+  .hero .btn.btn-outline {
+    width: 100%; min-height: 48px; margin-top: .4rem; padding: 0; border: 0; background: none;
+    color: var(--gold); font-size: 1.05rem; letter-spacing: .01em; text-transform: none;
+  }
+  .hero .btn.btn-outline::after { content: "\203A"; margin-left: .3em; font-size: 1.5em; line-height: 1; transition: transform .25s var(--ease-out); }
+  .hero .btn.btn-outline:active::after { transform: translateX(4px); }
+
+  /* « Je veux… » : lignes devenues des cartes arrondies, sur le même fond que la page */
+  .seeking { background: var(--pumice); }
+  .seeking-list { display: grid; gap: 10px; border-top: 0; }
+  .seek-item { border-bottom: 0; }
+  .seek {
+    padding: 1.2rem 1.2rem 1.2rem 1.3rem; border-radius: var(--r-card);
+    background: var(--limestone); border: 1px solid var(--line);
+  }
+  .seek--featured, .seek:hover, .seek:focus-visible { background: var(--teal); border-color: var(--teal); }
+
+  /* Bandeaux sombres : tuiles arrondies, légèrement détachées des bords */
+  .band, .band-gold:not(.band-beige) {
+    margin: 12px max(12px, env(safe-area-inset-right)) 12px max(12px, env(safe-area-inset-left));
+    border-radius: 30px; overflow: hidden;
+  }
+
+  /* Groupes de cartes : on glisse à l'horizontale, la carte suivante dépasse pour le suggérer */
+  .swipe {
+    display: flex; gap: 12px; overflow-x: auto; overflow-y: hidden;
+    margin-left: -1.5rem; margin-right: -1.5rem; padding: 0 1.5rem;
+    scroll-snap-type: x mandatory; scroll-padding-inline: 1.5rem;
+    overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .swipe::-webkit-scrollbar { display: none; }
+  .swipe > * { flex: 0 0 82%; min-width: 0; margin: 0; scroll-snap-align: start; }
+  .swipe > .reveal { opacity: 1; transform: none; }   /* la carte qui dépasse doit se voir tout de suite */
+  .swipe-dots { display: flex; justify-content: center; gap: 8px; margin-top: 1.2rem; }
+  .swipe-dots[hidden] { display: none; }
+  .swipe-dots button {
+    position: relative; width: 8px; height: 8px; padding: 0; border: 0; border-radius: 8px; cursor: pointer;
+    background: rgba(5, 67, 74, .28); transition: width .3s var(--ease-out), background .3s;
+  }
+  .swipe-dots button::before { content: ""; position: absolute; inset: -18px -6px; }   /* zone tactile de 44 px */
+  .swipe-dots button[aria-current] { width: 22px; background: var(--teal); }
+
+  /* Retour tactile : la carte s'enfonce légèrement sous le doigt */
+  .card:active, .stat:active, .event:active, .member:active, .tl-item:active, .seek-item:active { scale: .975; }
+
+  /* Pied de page : liens côte à côte, logo et contact en pleine largeur */
+  footer .container { grid-template-columns: 1fr 1fr; gap: 1.2rem 1rem; }
+  footer .container > div:first-child, footer .container > div:last-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 360px) { body { font-size: 1rem; } }
