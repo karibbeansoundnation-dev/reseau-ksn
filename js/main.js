@@ -4,8 +4,8 @@
 
 // --- À PERSONNALISER ---------------------------------------
 // Numéro WhatsApp de KSN au format international, sans + ni espaces
-// (ex : 596696123456 pour un mobile Martinique). REMPLACER :
-const KSN_WHATSAPP = "596696000000";
+// (ex : 33785053758 pour le 07 85 05 37 58, 596696123456 pour un mobile Martinique) :
+const KSN_WHATSAPP = "33785053758";
 // Adresse qui reçoit les inscriptions à la newsletter :
 const KSN_EMAIL = "contact@reseau-ksn.fr";
 // ------------------------------------------------------------
