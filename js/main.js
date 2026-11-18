@@ -1,5 +1,5 @@
 // ============================================================
-// KSN — scripts du site (navigation, formulaires, animations)
+// KSN — scripts du site (navigation, formulaires, cartes à faire glisser)
 // ============================================================
 
 // --- À PERSONNALISER ---------------------------------------
@@ -99,76 +99,6 @@ document.getElementById('form-contact')?.addEventListener('submit', (e) => {
   location.href = `mailto:${KSN_EMAIL}?subject=${encodeURIComponent('Contact KSN : ' + sujet)}&body=${encodeURIComponent(body)}`;
 });
 
-// ============================================================
-// ANIMATIONS
-// ============================================================
-// Reveal au scroll : cartes, titres, blocs — avec décalage en cascade
-function initAnims() {
-  if (reduceMotion) return;
-
-  const targets = document.querySelectorAll(
-    '.card, .seek-item, .stat, .tl-item, .member, .event, section h2, section .eyebrow, .seeking-eyebrow, .ksn-form, .filters'
-  );
-  targets.forEach(el => {
-    if (el.classList.contains('reveal')) return;
-    if (el.closest('[style*="display: none"], [style*="display:none"]')) return;
-    el.classList.add('reveal');
-    // cascade : décalage selon la position dans le parent
-    const siblings = el.parentElement ? [...el.parentElement.children].filter(c => c.classList.contains('reveal')) : [el];
-    const idx = siblings.indexOf(el);
-    el.style.setProperty('--d', `${Math.min(idx, 6) * 0.09}s`);
-  });
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(en => {
-      if (en.isIntersecting) {
-        en.target.classList.add('visible');
-        io.unobserve(en.target);
-        if (en.target.classList.contains('stat') || en.target.classList.contains('build')) countUp(en.target);
-      }
-    });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el));
-}
-
-// Compteurs animés : chiffres clés ("170+", "3", "170", "15") et compteur d'annuaire (page Le réseau)
-function countUp(statEl) {
-  const b = statEl.querySelector('b');
-  if (!b || b.dataset.done) return;
-  b.dataset.done = '1';
-  // « 170+ », « 15 », « ~8 000 » : préfixe, nombre (espace des milliers permise), suffixe
-  const m = b.textContent.trim().match(/^(\D*?)([\d\s]+)(\D*)$/);
-  if (!m) return;
-  const prefix = m[1], suffix = m[3];
-  const num = parseInt(m[2].replace(/\D/g, ''), 10);
-  if (isNaN(num)) return;
-  const fmt = (n) => n.toLocaleString('fr-FR').replace(/[\u202f\u00a0]/g, '\u00a0');   // espace insécable des milliers
-  const dur = 1400, t0 = performance.now();
-  const tick = (t) => {
-    const p = Math.min((t - t0) / dur, 1);
-    const eased = 1 - Math.pow(1 - p, 3);
-    b.textContent = prefix + fmt(Math.round(num * eased)) + suffix;
-    if (p < 1) requestAnimationFrame(tick);
-  };
-  requestAnimationFrame(tick);
-}
-
-// Marquee : duplique le contenu pour une boucle sans couture
-document.querySelectorAll('.marquee-track').forEach(track => {
-  track.innerHTML += track.innerHTML;
-});
-
-// Parallaxe légère sur le logo du héro (grands écrans seulement : sur iPhone, rien à faire défiler)
-if (!reduceMotion && window.matchMedia('(min-width: 641px)').matches) {
-  const spiral = document.querySelector('.hero .hero-spiral');
-  if (spiral) {
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      if (y < window.innerHeight) spiral.style.marginTop = `${y * 0.08}px`;
-    }, { passive: true });
-  }
-}
-
 // Cartes à faire glisser (mobile) : pastilles de position, cliquables, recalculées si un filtre masque des cartes
 function refreshSwipe() {
   document.querySelectorAll('.swipe').forEach((sw) => {
@@ -210,4 +140,3 @@ function markSwipe(sw, dots) {
 refreshSwipe();
 window.addEventListener('resize', refreshSwipe);
 
-initAnims();
