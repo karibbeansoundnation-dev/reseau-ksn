@@ -758,3 +758,26 @@ section[id], .news[id] { scroll-margin-top: 5.5rem; }
 }
 
 @media (max-width: 360px) { body { font-size: 1rem; } }
+
+/* ---------- Mentions légales : texte courant ---------- */
+.legal { max-width: 72ch; }
+.legal h2 { font-size: clamp(1.5rem, 3.2vw, 2.1rem); margin: 2.6rem 0 .8rem; }
+.legal p { margin-bottom: 1rem; }
+.legal a { color: var(--teal); text-decoration-color: var(--gold-deep); text-underline-offset: 3px; overflow-wrap: anywhere; }
+.legal-dl { display: grid; grid-template-columns: 11rem 1fr; gap: .5rem 1.2rem; margin: 0 0 1rem; }
+.legal-dl dt { font-size: .74rem; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); padding-top: .25rem; }
+.todo { background: var(--gold-pale); border: 1px dashed var(--gold-deep); padding: .05rem .45rem; }
+.legal-table { width: 100%; border-collapse: collapse; margin: 0 0 1.4rem; font-size: .95rem; }
+.legal-table th, .legal-table td { text-align: left; vertical-align: top; padding: .8rem 1rem .8rem 0; border-bottom: 1px solid var(--line); }
+.legal-table th { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); border-bottom: 1.5px solid var(--teal); }
+@media (max-width: 640px) {
+  .legal-dl { grid-template-columns: 1fr; gap: 0; }
+  .legal-dl dd { margin-bottom: .9rem; }
+  .legal-table thead { display: none; }
+  .legal-table tr { display: block; padding: .9rem 0; border-bottom: 1px solid var(--line); }
+  .legal-table td { display: block; padding: .2rem 0; border: 0; }
+  .legal-table td::before {
+    content: attr(data-label); display: block; font-size: .68rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .14em; color: var(--muted);
+  }
+}
