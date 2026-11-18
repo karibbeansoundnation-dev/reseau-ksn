@@ -363,10 +363,15 @@ nav a.active { color: var(--gold); box-shadow: inset 0 -2px 0 var(--gold); borde
 @media (hover: hover) { .filters select:hover { background: #fff; } }
 .filters input:focus, .filters select:focus { background: #fff; outline: none; box-shadow: 0 0 0 3px rgba(227, 181, 103, .6); }
 .filters input { -webkit-appearance: none; appearance: none; }
-.membre-card b { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 1.15rem; letter-spacing: .03em; color: var(--teal); }
-.membre-card .role { display: inline-block; background: var(--gold-pale); color: var(--gold-ink); border-radius: var(--r-tag); border: 1px solid var(--gold-deep); padding: .2rem .7rem; font-size: .66rem; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; margin: .3rem 0; }
-.membre-card .terr { font-size: .85rem; color: var(--muted); }
-.membre-cta { margin-top: 1rem; }
+.filters input[type="search"] { flex: 1 1 18rem; max-width: 30rem; }
+.annuaire-count { margin: 0 0 .8rem; font-size: .76rem; font-weight: 700; text-transform: uppercase; letter-spacing: .16em; color: var(--gold-ink); }
+.annuaire { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3rem; border-top: 1.5px solid var(--teal); }
+.membre-card { padding: 1.1rem 0; border-bottom: 1px solid var(--line); min-width: 0; }
+.membre-card b { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 1.1rem; letter-spacing: .03em; color: var(--teal); display: block; line-height: 1.25; margin-bottom: .3rem; overflow-wrap: anywhere; }
+.membre-card p { margin: 0; font-size: .95rem; line-height: 1.5; }
+.annuaire-empty { margin-top: 1.4rem; }
+.annuaire-empty[hidden] { display: none; }
+@media (max-width: 800px) { .annuaire { grid-template-columns: minmax(0, 1fr); } }
 
 /* Annuaire en construction : compteur de membres référencés et jauge vers l'objectif */
 .build { margin-top: 2rem; text-align: center; }
@@ -600,7 +605,7 @@ footer img { height: 112px; width: 112px; margin: -.6rem 0 .5rem -.6rem; }
     padding: .6rem 1.2rem; font-size: .76rem;
   }
   .tag { font-size: .72rem; }
-  .badge, .membre-card .role { font-size: .72rem; }
+  .badge { font-size: .72rem; }
 
   /* Pied de page : zones tactiles de 44 px */
   footer { padding-top: 2.2rem; margin-top: 2rem; }

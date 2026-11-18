@@ -35,21 +35,23 @@ document.querySelectorAll('nav a').forEach(a => {
   if (a.getAttribute('href') === page) a.classList.add('active');
 });
 
-// Filtres annuaire (page réseau)
-const met = document.getElementById('f-metier');
-const ter = document.getElementById('f-territoire');
+// Recherche dans l'annuaire (page réseau) : sans accents ni majuscules
 const search = document.getElementById('f-search');
+const norm = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 function filtre() {
-  const m = met?.value || '', t = ter?.value || '', q = (search?.value || '').toLowerCase();
+  const q = norm(search?.value || '').trim();
+  let n = 0;
   document.querySelectorAll('.membre-card').forEach(c => {
-    const ok = (!m || c.dataset.metier === m) &&
-               (!t || c.dataset.territoire === t) &&
-               (!q || c.textContent.toLowerCase().includes(q));
+    const ok = !q || norm(c.textContent).includes(q);
     c.style.display = ok ? '' : 'none';
+    if (ok) n++;
   });
-  refreshSwipe();
+  const compte = document.getElementById('f-count');
+  if (compte) compte.textContent = n + (n > 1 ? ' membres' : ' membre');
+  const vide = document.getElementById('f-empty');
+  if (vide) vide.hidden = n > 0;
 }
-[met, ter, search].forEach(el => el?.addEventListener('input', filtre));
+search?.addEventListener('input', filtre);
 
 // Actualités : filtre par catégorie (puces « Toutes / KSN / Filière / Membres »)
 const chips = document.querySelectorAll('.chip[data-filter]');

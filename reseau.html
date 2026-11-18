@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=20261118c">
+<link rel="stylesheet" href="css/style.css?v=20261118e">
 <!-- Statistiques de visites Vercel (sans cookie) -->
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
 <script defer src="/_vercel/insights/script.js"></script>
@@ -50,10 +50,100 @@
   <div class="container">
     <p class="eyebrow">Annuaire des membres</p>
     <h2>Trouver un·e pro</h2>
-    <p style="max-width:66ch;margin-bottom:.4rem">Chaque membre aura une fiche professionnelle, visible des partenaires et des institutions.</p>
+    <p style="max-width:66ch;margin-bottom:.4rem">Voici les membres inscrits à ce jour et leurs rôles dans la filière. Chacun aura ensuite une fiche professionnelle, visible des partenaires et des institutions.</p>
 
-    <!-- Annuaire : filtres et fiches d'exemple retirés au lancement, en attendant les vraies fiches.
-         Le modèle (filtres + cartes) est dans l'historique Git : git show 727f692:reseau.html -->
+    <div class="filters">
+      <input id="f-search" type="search" placeholder="Rechercher un nom ou un rôle" aria-label="Rechercher un membre" autocomplete="off" autocapitalize="none" enterkeyhint="search">
+    </div>
+    <p class="annuaire-count" id="f-count" aria-live="polite">82 membres</p>
+
+    <!-- Liste générée depuis les réponses au formulaire (colonnes « Prénom et nom » et « Quels sont tes rôles… » seulement).
+         Une personne inscrite deux fois n'apparaît qu'une fois (dernière réponse). Aucun contact n'est publié. -->
+    <ul class="annuaire">
+      <li class="membre-card"><b>Alice Hunel</b><p>Communication et hôtesse événementielle</p></li>
+      <li class="membre-card"><b>Alix SAINTE-ROSE</b><p>Artiste</p></li>
+      <li class="membre-card"><b>Alphonse Red</b><p>Média et réalisateur producteur vidéo</p></li>
+      <li class="membre-card"><b>Amel tintin</b><p>Stratège créative &amp; développement culturel international ; Accompagnatrice de talents &amp; développeuse de carrière ; Productrice de projets artistiques &amp; interculturels ; Passeuse entre les territoires &amp; créatrice de ponts ; Consultante en structuration &amp; financement culturel</p></li>
+      <li class="membre-card"><b>Andy Pancarte</b><p>Orga et manager</p></li>
+      <li class="membre-card"><b>Armelle Haure-Placé</b><p>Manageuse d'artiste - chanteuse, autrice, compositrice, interprète - ingéson studio</p></li>
+      <li class="membre-card"><b>Arthur Lardière</b><p>Manager de Ricky Bishop / Chef de projet / DA chez Low Wood-Combo labels</p></li>
+      <li class="membre-card"><b>Aurélie Chantelly</b><p>Artiste visuelle : photographe réalisatrice et directrice artistique</p></li>
+      <li class="membre-card"><b>Axel GERMANY</b><p>Organisateur d'événements</p></li>
+      <li class="membre-card"><b>BERTRAND COLOGER</b><p>Producteur</p></li>
+      <li class="membre-card"><b>Claire EBONG aka Ceejäe</b><p>Documenter nos musiques/artistes et créer du contenu autour de l'industrie musicale actuelle dans le but de développer à terme un vrai média</p></li>
+      <li class="membre-card"><b>Coraline Commin</b><p>Fondatrice d'un média, chargée de communication et attachée de presse</p></li>
+      <li class="membre-card"><b>Déwick Sigère</b><p>Gérant média</p></li>
+      <li class="membre-card"><b>Didier Atine</b><p>Artist development executive</p></li>
+      <li class="membre-card"><b>Emmanuelle BONIFACE</b><p>Chargée de production - Organisatrice d'événements (festival) - Chargée de médiation culturelle</p></li>
+      <li class="membre-card"><b>Eric K-Roz</b><p>Production audio visuel - Galerie d'art - événement</p></li>
+      <li class="membre-card"><b>Eulalie Asselin de Beauville</b><p>Booker - Cheffe de projets</p></li>
+      <li class="membre-card"><b>GNALEKO Sarafina</b><p>Chef de projet/DA</p></li>
+      <li class="membre-card"><b>Gregory Florimond</b><p>Je suis graphiste spécialisé dans le sport</p></li>
+      <li class="membre-card"><b>Guigs</b><p>Créateur de contenu et Média</p></li>
+      <li class="membre-card"><b>Guilaine Goujon</b><p>Directrice promo</p></li>
+      <li class="membre-card"><b>Guillaume MARIE-LOUISE (Le Beat)</b><p>Label, Curateur de playlist et service pour label (agence Marketing Musical)</p></li>
+      <li class="membre-card"><b>Haby Athéna BÂ</b><p>Legal &amp; Business Affairs</p></li>
+      <li class="membre-card"><b>Hangarad Capresse</b><p>Productrice auteure interprète direction artistique monteuse infographiste cadreuse</p></li>
+      <li class="membre-card"><b>Ismaël ALIN</b><p>Chef de projet</p></li>
+      <li class="membre-card"><b>Jean-Christophe Zaïre</b><p>Attaché de presse</p></li>
+      <li class="membre-card"><b>Jean-Philippe PENNONT</b><p>Artiste, Ingé son, (Compositeur et vidéaste si besoin)</p></li>
+      <li class="membre-card"><b>Jérémy Belrose</b><p>Ingénieur du son, Auteur, Topliner, Réal, Structure d'accompagnement créatif en cours de développement</p></li>
+      <li class="membre-card"><b>Jeremy Bibrac</b><p>Manager, producteur, éditeur</p></li>
+      <li class="membre-card"><b>Jérémy LPL</b><p>Danseur, chorégraphe et movement director</p></li>
+      <li class="membre-card"><b>Jérôme AMORY</b><p>Legal &amp; Business Affairs</p></li>
+      <li class="membre-card"><b>Jérôme MENIR</b><p>Auteur-Compositeur-Chanteur / Réalisateur-Monteur / Autoproduction</p></li>
+      <li class="membre-card"><b>Jessy lascoste</b><p>Producteur</p></li>
+      <li class="membre-card"><b>Juliette Réache</b><p>Coordinatrice label et journaliste</p></li>
+      <li class="membre-card"><b>Karyne Mac</b><p>Chargée de Production, Attachée de Presse, Manager</p></li>
+      <li class="membre-card"><b>Katharina R-ECESAIRE</b><p>Artist project manager, day to day manager, consultant, production coordinator</p></li>
+      <li class="membre-card"><b>Kerwan Montoute</b><p>Artiste, Ingénieur son, producteur</p></li>
+      <li class="membre-card"><b>Laetitia JARVIS</b><p>Music publisher</p></li>
+      <li class="membre-card"><b>Laurence ventura</b><p>Manager d'artistes</p></li>
+      <li class="membre-card"><b>Laury Maroudin jasmin</b><p>Je suis directrice artistique</p></li>
+      <li class="membre-card"><b>Lil low Blingthat</b><p>Chanteur, acteur, président d'association, producteur, éditeur</p></li>
+      <li class="membre-card"><b>Lionel Alcindor</b><p>Artiste et directeur artistique</p></li>
+      <li class="membre-card"><b>Liseron Monfils</b><p>Chargée éditorial et Community manager chez Universal en alternance</p></li>
+      <li class="membre-card"><b>Liza-Marie Peronne</b><p>Journaliste musique, chroniqueuse radio, réalisatrice, photographe</p></li>
+      <li class="membre-card"><b>Ludivine Rome</b><p>Responsable digitale en Major</p></li>
+      <li class="membre-card"><b>Ludmilla Romagne Ho-Sing-Ming</b><p>Responsable des Opérations &amp; Pôle Chefs de projets (Warner Music)</p></li>
+      <li class="membre-card"><b>Maeli ERIALE</b><p>DA et communication</p></li>
+      <li class="membre-card"><b>Malcolm Renoir</b><p>Artiste</p></li>
+      <li class="membre-card"><b>Manuel Cinraul</b><p>Community Manager, DA, Manager, Auteur, Topliner</p></li>
+      <li class="membre-card"><b>Margerie Tazaro</b><p>Administration / Juridique / Publishing / Management</p></li>
+      <li class="membre-card"><b>Mathieu</b><p>Artiste auteur interprète, producteur, community manager, promoteur, formateur, conseils.</p></li>
+      <li class="membre-card"><b>Mathieu Lafine-chanol</b><p>Je suis producteur/ compositeur</p></li>
+      <li class="membre-card"><b>Maÿllis Lindor</b><p>Directrice artistique, photographe, vidéaste</p></li>
+      <li class="membre-card"><b>Mélina Charlery</b><p>Je travaille dans la direction artistique. Actuellement je suis dans une maison de maroquinerie et j'ai également ma micro entreprise. Je travaille également sur un projet pour mettre en avant le design et l'art caribéen :)</p></li>
+      <li class="membre-card"><b>Michael JOHN</b><p>Ingénieur Culturel</p></li>
+      <li class="membre-card"><b>Michèle BELTAN</b><p>Promotion/ communication digitale/ Marketing musical / formation professionnelle d'adultes</p></li>
+      <li class="membre-card"><b>Nathan Delinde</b><p>Artiste, beatmaker, ingénieur son studio/live</p></li>
+      <li class="membre-card"><b>Nathan MICHEL (NJAM)</b><p>Artiste, beatmaker</p></li>
+      <li class="membre-card"><b>Noor-Sharina Grondin</b><p>Doctorante et médiatrice culturelle</p></li>
+      <li class="membre-card"><b>Oneal CHATELOT</b><p>Je suis beatmaker et ingénieur du son</p></li>
+      <li class="membre-card"><b>Patrice louisor - Kaiser</b><p>Production. Éditeur. Distribution Digital. Chef de projet</p></li>
+      <li class="membre-card"><b>Pricilla AMBERT</b><p>Artiste indépendante</p></li>
+      <li class="membre-card"><b>Quentin Rolland</b><p>Accompagnement d'artistes (administratif, marketing, développement)</p></li>
+      <li class="membre-card"><b>Raïssa CHALU</b><p>Manager danseurs, manager directeur artistique, coordination festival, coordination régie artistique</p></li>
+      <li class="membre-card"><b>Ronny Turiaf</b><p>Fondateur Résidence Créative + Investisseur</p></li>
+      <li class="membre-card"><b>Rudy RICHARD-EDMOND</b><p>Auteur Compositeur Interprète</p></li>
+      <li class="membre-card"><b>Salomé Duhoo</b><p>Administratrice de production de musiques actuelles et consultante RSE musiques actuelles</p></li>
+      <li class="membre-card"><b>Samoney samoney</b><p>Compositeur</p></li>
+      <li class="membre-card"><b>Samuel LONGCHAMPS</b><p>Chanteur rappeur</p></li>
+      <li class="membre-card"><b>Samuel SUEDOIS</b><p>Directeur Artistique, Editeur</p></li>
+      <li class="membre-card"><b>Samyrah Gustave</b><p>Je suis co-fondatrice du média musical The Youth TV et directrice artistique freelance.</p></li>
+      <li class="membre-card"><b>Sonny R.</b><p>Média, Organisateur événementiel</p></li>
+      <li class="membre-card"><b>Steeve Populo</b><p>Directeur Promotion / Relations presses / Events / Image</p></li>
+      <li class="membre-card"><b>Swan Badol</b><p>Média et Organisateur Événementiel</p></li>
+      <li class="membre-card"><b>Taïna LAURENCIN</b><p>Je suis étudiante et artiste</p></li>
+      <li class="membre-card"><b>Taïriq</b><p>Manager</p></li>
+      <li class="membre-card"><b>Treicy MONCOQ</b><p>Je travaille dans le secteur de la mode principalement dans la stratégie de communication et community management. Je fais aussi du stylisme.</p></li>
+      <li class="membre-card"><b>Tressy Cazimir</b><p>Manager artistique et chargée de développement label</p></li>
+      <li class="membre-card"><b>Tyron808</b><p>Compositeur/producer</p></li>
+      <li class="membre-card"><b>Yasin ZANDRONIS</b><p>Management et direction artistique</p></li>
+      <li class="membre-card"><b>Yohan Foule</b><p>Manageur / Producteur</p></li>
+      <li class="membre-card"><b>Zoé MANGEOT</b><p>Chargée d'administration chez Universal Music France Events (branche live et concerts d'Universal)</p></li>
+    </ul>
+    <p class="annuaire-empty" id="f-empty" hidden>Aucun membre ne correspond à cette recherche.</p>
 
     <!-- Compteur : 170 membres référencés sur un objectif de 200 (chiffres de la campagne d'adhésion 2026).
          Pour changer : data-count et le texte du premier <b>, le texte du second <b>, et --p (= référencés ÷ objectif). -->
@@ -154,6 +244,6 @@
   <div class="foot-bottom">© 2026 Karibbean Sound Nation · Association loi 1901 · <a href="#">Mentions légales</a></div>
 </footer>
 
-<script src="js/main.js?v=20261118b"></script>
+<script src="js/main.js?v=20261118c"></script>
 </body>
 </html>
