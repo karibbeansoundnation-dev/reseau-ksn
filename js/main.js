@@ -70,10 +70,10 @@ document.getElementById('form-rejoindre')?.addEventListener('submit', (e) => {
   const projet = document.getElementById('r-projet').value.trim();
   const msg =
 `Bonjour KSN ! Je souhaite rejoindre le groupe WhatsApp de la communauté.
-— Nom : ${nom}
-— Activité : ${metier}
-— Territoire : ${terr}${projet ? `
-— Mon projet : ${projet}` : ''}
+Nom : ${nom}
+Activité : ${metier}
+Territoire : ${terr}${projet ? `
+Projet : ${projet}` : ''}
 Merci !`;
   const url = `https://wa.me/${KSN_WHATSAPP}?text=${encodeURIComponent(msg)}`;
   // Si Safari bloque l'ouverture d'un nouvel onglet, on bascule dans l'onglet courant
@@ -95,8 +95,8 @@ document.getElementById('form-contact')?.addEventListener('submit', (e) => {
   const email = document.getElementById('c-email').value.trim();
   const sujet = document.getElementById('c-sujet').value;
   const message = document.getElementById('c-message').value.trim();
-  const body = `${message}\n\n— ${nom}\n${email}`;
-  location.href = `mailto:${KSN_EMAIL}?subject=${encodeURIComponent('Contact KSN — ' + sujet)}&body=${encodeURIComponent(body)}`;
+  const body = `${message}\n\n${nom}\n${email}`;
+  location.href = `mailto:${KSN_EMAIL}?subject=${encodeURIComponent('Contact KSN : ' + sujet)}&body=${encodeURIComponent(body)}`;
 });
 
 // ============================================================
