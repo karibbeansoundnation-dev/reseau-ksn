@@ -35,23 +35,96 @@ document.querySelectorAll('nav a').forEach(a => {
   if (a.getAttribute('href') === page) a.classList.add('active');
 });
 
-// Recherche dans l'annuaire (page réseau) : sans accents ni majuscules
-const search = document.getElementById('f-search');
-const norm = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-function filtre() {
-  const q = norm(search?.value || '').trim();
-  let n = 0;
-  document.querySelectorAll('.membre-card').forEach(c => {
-    const ok = !q || norm(c.textContent).includes(q);
-    c.style.display = ok ? '' : 'none';
-    if (ok) n++;
-  });
+// Annuaire (page réseau) : recherche, filtres origine et secteur, pages de 5 membres.
+// Sans JavaScript, toute la liste reste affichée.
+const annuaire = document.querySelector('.annuaire');
+if (annuaire) {
+  const PAR_PAGE = 5;
+  const cartes = [...annuaire.querySelectorAll('.membre-card')];
+  const fSearch = document.getElementById('f-search');
+  const fOrigine = document.getElementById('f-origine');
+  const fSecteur = document.getElementById('f-secteur');
   const compte = document.getElementById('f-count');
-  if (compte) compte.textContent = n + (n > 1 ? ' membres' : ' membre');
   const vide = document.getElementById('f-empty');
-  if (vide) vide.hidden = n > 0;
+  const pager = document.getElementById('pager');
+  const norm = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  let page = 1;
+
+  const correspond = (c, q, o, s) =>
+    (!q || norm(c.textContent).includes(q)) &&
+    (!o || c.dataset.origines.split('|').includes(o)) &&
+    (!s || c.dataset.secteurs.split('|').includes(s));
+
+  function bouton(texte, cible, { actif = false, desactive = false, label = '', classe = '' } = {}) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = texte;
+    if (classe) b.className = classe;
+    if (label) b.setAttribute('aria-label', label);
+    if (actif) b.setAttribute('aria-current', 'page');
+    if (desactive) b.disabled = true;
+    else b.addEventListener('click', () => { page = cible; rendre(true); });
+    return b;
+  }
+
+  function numeros(pages) {
+    // 1 … page-1 page page+1 … dernière
+    const sel = new Set([1, pages, page - 1, page, page + 1].filter((n) => n >= 1 && n <= pages));
+    const liste = [...sel].sort((a, b) => a - b);
+    const sortie = [];
+    liste.forEach((n, i) => {
+      if (i && n - liste[i - 1] === 2) sortie.push(n - 1);        // un seul numéro manquant : on l'affiche
+      else if (i && n - liste[i - 1] > 2) sortie.push('…');
+      sortie.push(n);
+    });
+    return sortie;
+  }
+
+  function rendre(defiler) {
+    const q = norm(fSearch?.value || '').trim();
+    const o = fOrigine?.value || '', s = fSecteur?.value || '';
+    const trouvees = cartes.filter((c) => correspond(c, q, o, s));
+    const pages = Math.max(1, Math.ceil(trouvees.length / PAR_PAGE));
+    page = Math.min(Math.max(page, 1), pages);
+    const debut = (page - 1) * PAR_PAGE;
+    const visibles = new Set(trouvees.slice(debut, debut + PAR_PAGE));
+    cartes.forEach((c) => { c.hidden = !visibles.has(c); });
+
+    const n = trouvees.length;
+    if (compte) compte.textContent = n + (n > 1 ? ' membres' : ' membre');
+    if (vide) vide.hidden = n > 0;
+
+    if (pager) {
+      pager.replaceChildren();
+      pager.hidden = pages < 2;
+      if (pages > 1) {
+        pager.append(bouton('Précédent', page - 1, { desactive: page === 1, classe: 'pager-nav' }));
+        const nums = document.createElement('span');
+        nums.className = 'pager-nums';
+        numeros(pages).forEach((x) => {
+          if (x === '…') {
+            const e = document.createElement('span');
+            e.textContent = '…';
+            e.setAttribute('aria-hidden', 'true');
+            nums.append(e);
+          } else {
+            nums.append(bouton(String(x), x, { actif: x === page, label: 'Page ' + x }));
+          }
+        });
+        pager.append(nums);
+        const info = document.createElement('span');
+        info.className = 'pager-info';
+        info.textContent = 'Page ' + page + ' sur ' + pages;
+        pager.append(info);
+        pager.append(bouton('Suivant', page + 1, { desactive: page === pages, classe: 'pager-nav' }));
+      }
+    }
+    if (defiler) document.getElementById('f-search')?.closest('.filters')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+  }
+
+  [fSearch, fOrigine, fSecteur].forEach((el) => el?.addEventListener('input', () => { page = 1; rendre(false); }));
+  rendre(false);
 }
-search?.addEventListener('input', filtre);
 
 // Actualités : filtre par catégorie (puces « Toutes / KSN / Filière / Membres »)
 const chips = document.querySelectorAll('.chip[data-filter]');

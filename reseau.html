@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=20261118e">
+<link rel="stylesheet" href="css/style.css?v=20261118f">
 <!-- Statistiques de visites Vercel (sans cookie) -->
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
 <script defer src="/_vercel/insights/script.js"></script>
@@ -54,96 +54,121 @@
 
     <div class="filters">
       <input id="f-search" type="search" placeholder="Rechercher un nom ou un rôle" aria-label="Rechercher un membre" autocomplete="off" autocapitalize="none" enterkeyhint="search">
+      <select id="f-origine" aria-label="Filtrer par origine">
+        <option value="">Toutes les origines</option>
+        <option>Martinique</option>
+        <option>Guadeloupe</option>
+        <option>Guyane</option>
+        <option>Paris et Île-de-France</option>
+        <option>Reste de l&#x27;Hexagone</option>
+        <option>Ailleurs</option>
+      </select>
+      <select id="f-secteur" aria-label="Filtrer par secteur d'activité">
+        <option value="">Tous les secteurs</option>
+        <option>Artiste, création</option>
+        <option>Production, label, édition</option>
+        <option>Management, booking, projets</option>
+        <option>Direction artistique, communication</option>
+        <option>Technique, son, image</option>
+        <option>Média, journalisme</option>
+        <option>Événementiel</option>
+        <option>Administration, juridique</option>
+        <option>Culture, formation, médiation</option>
+        <option>Autre</option>
+      </select>
     </div>
     <p class="annuaire-count" id="f-count" aria-live="polite">82 membres</p>
 
-    <!-- Liste générée depuis les réponses au formulaire (colonnes « Prénom et nom » et « Quels sont tes rôles… » seulement).
-         Une personne inscrite deux fois n'apparaît qu'une fois (dernière réponse). Aucun contact n'est publié. -->
+    <!-- Liste générée depuis les réponses au formulaire (colonnes « Prénom et nom », « Tu viens d'où ? » et « Quels sont tes rôles… » seulement).
+         Une personne inscrite deux fois n'apparaît qu'une fois (dernière réponse). Aucun contact n'est publié.
+         data-origines : territoires de la réponse, pour le filtre. data-secteurs : secteurs déduits des mots du rôle, pour le filtre.
+         Les pages de 5 membres sont gérées par js/main.js (sans JavaScript, toute la liste s'affiche). -->
     <ul class="annuaire">
-      <li class="membre-card"><b>Alice Hunel</b><p>Communication et hôtesse événementielle</p></li>
-      <li class="membre-card"><b>Alix SAINTE-ROSE</b><p>Artiste</p></li>
-      <li class="membre-card"><b>Alphonse Red</b><p>Média et réalisateur producteur vidéo</p></li>
-      <li class="membre-card"><b>Amel tintin</b><p>Stratège créative &amp; développement culturel international ; Accompagnatrice de talents &amp; développeuse de carrière ; Productrice de projets artistiques &amp; interculturels ; Passeuse entre les territoires &amp; créatrice de ponts ; Consultante en structuration &amp; financement culturel</p></li>
-      <li class="membre-card"><b>Andy Pancarte</b><p>Orga et manager</p></li>
-      <li class="membre-card"><b>Armelle Haure-Placé</b><p>Manageuse d'artiste - chanteuse, autrice, compositrice, interprète - ingéson studio</p></li>
-      <li class="membre-card"><b>Arthur Lardière</b><p>Manager de Ricky Bishop / Chef de projet / DA chez Low Wood-Combo labels</p></li>
-      <li class="membre-card"><b>Aurélie Chantelly</b><p>Artiste visuelle : photographe réalisatrice et directrice artistique</p></li>
-      <li class="membre-card"><b>Axel GERMANY</b><p>Organisateur d'événements</p></li>
-      <li class="membre-card"><b>BERTRAND COLOGER</b><p>Producteur</p></li>
-      <li class="membre-card"><b>Claire EBONG aka Ceejäe</b><p>Documenter nos musiques/artistes et créer du contenu autour de l'industrie musicale actuelle dans le but de développer à terme un vrai média</p></li>
-      <li class="membre-card"><b>Coraline Commin</b><p>Fondatrice d'un média, chargée de communication et attachée de presse</p></li>
-      <li class="membre-card"><b>Déwick Sigère</b><p>Gérant média</p></li>
-      <li class="membre-card"><b>Didier Atine</b><p>Artist development executive</p></li>
-      <li class="membre-card"><b>Emmanuelle BONIFACE</b><p>Chargée de production - Organisatrice d'événements (festival) - Chargée de médiation culturelle</p></li>
-      <li class="membre-card"><b>Eric K-Roz</b><p>Production audio visuel - Galerie d'art - événement</p></li>
-      <li class="membre-card"><b>Eulalie Asselin de Beauville</b><p>Booker - Cheffe de projets</p></li>
-      <li class="membre-card"><b>GNALEKO Sarafina</b><p>Chef de projet/DA</p></li>
-      <li class="membre-card"><b>Gregory Florimond</b><p>Je suis graphiste spécialisé dans le sport</p></li>
-      <li class="membre-card"><b>Guigs</b><p>Créateur de contenu et Média</p></li>
-      <li class="membre-card"><b>Guilaine Goujon</b><p>Directrice promo</p></li>
-      <li class="membre-card"><b>Guillaume MARIE-LOUISE (Le Beat)</b><p>Label, Curateur de playlist et service pour label (agence Marketing Musical)</p></li>
-      <li class="membre-card"><b>Haby Athéna BÂ</b><p>Legal &amp; Business Affairs</p></li>
-      <li class="membre-card"><b>Hangarad Capresse</b><p>Productrice auteure interprète direction artistique monteuse infographiste cadreuse</p></li>
-      <li class="membre-card"><b>Ismaël ALIN</b><p>Chef de projet</p></li>
-      <li class="membre-card"><b>Jean-Christophe Zaïre</b><p>Attaché de presse</p></li>
-      <li class="membre-card"><b>Jean-Philippe PENNONT</b><p>Artiste, Ingé son, (Compositeur et vidéaste si besoin)</p></li>
-      <li class="membre-card"><b>Jérémy Belrose</b><p>Ingénieur du son, Auteur, Topliner, Réal, Structure d'accompagnement créatif en cours de développement</p></li>
-      <li class="membre-card"><b>Jeremy Bibrac</b><p>Manager, producteur, éditeur</p></li>
-      <li class="membre-card"><b>Jérémy LPL</b><p>Danseur, chorégraphe et movement director</p></li>
-      <li class="membre-card"><b>Jérôme AMORY</b><p>Legal &amp; Business Affairs</p></li>
-      <li class="membre-card"><b>Jérôme MENIR</b><p>Auteur-Compositeur-Chanteur / Réalisateur-Monteur / Autoproduction</p></li>
-      <li class="membre-card"><b>Jessy lascoste</b><p>Producteur</p></li>
-      <li class="membre-card"><b>Juliette Réache</b><p>Coordinatrice label et journaliste</p></li>
-      <li class="membre-card"><b>Karyne Mac</b><p>Chargée de Production, Attachée de Presse, Manager</p></li>
-      <li class="membre-card"><b>Katharina R-ECESAIRE</b><p>Artist project manager, day to day manager, consultant, production coordinator</p></li>
-      <li class="membre-card"><b>Kerwan Montoute</b><p>Artiste, Ingénieur son, producteur</p></li>
-      <li class="membre-card"><b>Laetitia JARVIS</b><p>Music publisher</p></li>
-      <li class="membre-card"><b>Laurence ventura</b><p>Manager d'artistes</p></li>
-      <li class="membre-card"><b>Laury Maroudin jasmin</b><p>Je suis directrice artistique</p></li>
-      <li class="membre-card"><b>Lil low Blingthat</b><p>Chanteur, acteur, président d'association, producteur, éditeur</p></li>
-      <li class="membre-card"><b>Lionel Alcindor</b><p>Artiste et directeur artistique</p></li>
-      <li class="membre-card"><b>Liseron Monfils</b><p>Chargée éditorial et Community manager chez Universal en alternance</p></li>
-      <li class="membre-card"><b>Liza-Marie Peronne</b><p>Journaliste musique, chroniqueuse radio, réalisatrice, photographe</p></li>
-      <li class="membre-card"><b>Ludivine Rome</b><p>Responsable digitale en Major</p></li>
-      <li class="membre-card"><b>Ludmilla Romagne Ho-Sing-Ming</b><p>Responsable des Opérations &amp; Pôle Chefs de projets (Warner Music)</p></li>
-      <li class="membre-card"><b>Maeli ERIALE</b><p>DA et communication</p></li>
-      <li class="membre-card"><b>Malcolm Renoir</b><p>Artiste</p></li>
-      <li class="membre-card"><b>Manuel Cinraul</b><p>Community Manager, DA, Manager, Auteur, Topliner</p></li>
-      <li class="membre-card"><b>Margerie Tazaro</b><p>Administration / Juridique / Publishing / Management</p></li>
-      <li class="membre-card"><b>Mathieu</b><p>Artiste auteur interprète, producteur, community manager, promoteur, formateur, conseils.</p></li>
-      <li class="membre-card"><b>Mathieu Lafine-chanol</b><p>Je suis producteur/ compositeur</p></li>
-      <li class="membre-card"><b>Maÿllis Lindor</b><p>Directrice artistique, photographe, vidéaste</p></li>
-      <li class="membre-card"><b>Mélina Charlery</b><p>Je travaille dans la direction artistique. Actuellement je suis dans une maison de maroquinerie et j'ai également ma micro entreprise. Je travaille également sur un projet pour mettre en avant le design et l'art caribéen :)</p></li>
-      <li class="membre-card"><b>Michael JOHN</b><p>Ingénieur Culturel</p></li>
-      <li class="membre-card"><b>Michèle BELTAN</b><p>Promotion/ communication digitale/ Marketing musical / formation professionnelle d'adultes</p></li>
-      <li class="membre-card"><b>Nathan Delinde</b><p>Artiste, beatmaker, ingénieur son studio/live</p></li>
-      <li class="membre-card"><b>Nathan MICHEL (NJAM)</b><p>Artiste, beatmaker</p></li>
-      <li class="membre-card"><b>Noor-Sharina Grondin</b><p>Doctorante et médiatrice culturelle</p></li>
-      <li class="membre-card"><b>Oneal CHATELOT</b><p>Je suis beatmaker et ingénieur du son</p></li>
-      <li class="membre-card"><b>Patrice louisor - Kaiser</b><p>Production. Éditeur. Distribution Digital. Chef de projet</p></li>
-      <li class="membre-card"><b>Pricilla AMBERT</b><p>Artiste indépendante</p></li>
-      <li class="membre-card"><b>Quentin Rolland</b><p>Accompagnement d'artistes (administratif, marketing, développement)</p></li>
-      <li class="membre-card"><b>Raïssa CHALU</b><p>Manager danseurs, manager directeur artistique, coordination festival, coordination régie artistique</p></li>
-      <li class="membre-card"><b>Ronny Turiaf</b><p>Fondateur Résidence Créative + Investisseur</p></li>
-      <li class="membre-card"><b>Rudy RICHARD-EDMOND</b><p>Auteur Compositeur Interprète</p></li>
-      <li class="membre-card"><b>Salomé Duhoo</b><p>Administratrice de production de musiques actuelles et consultante RSE musiques actuelles</p></li>
-      <li class="membre-card"><b>Samoney samoney</b><p>Compositeur</p></li>
-      <li class="membre-card"><b>Samuel LONGCHAMPS</b><p>Chanteur rappeur</p></li>
-      <li class="membre-card"><b>Samuel SUEDOIS</b><p>Directeur Artistique, Editeur</p></li>
-      <li class="membre-card"><b>Samyrah Gustave</b><p>Je suis co-fondatrice du média musical The Youth TV et directrice artistique freelance.</p></li>
-      <li class="membre-card"><b>Sonny R.</b><p>Média, Organisateur événementiel</p></li>
-      <li class="membre-card"><b>Steeve Populo</b><p>Directeur Promotion / Relations presses / Events / Image</p></li>
-      <li class="membre-card"><b>Swan Badol</b><p>Média et Organisateur Événementiel</p></li>
-      <li class="membre-card"><b>Taïna LAURENCIN</b><p>Je suis étudiante et artiste</p></li>
-      <li class="membre-card"><b>Taïriq</b><p>Manager</p></li>
-      <li class="membre-card"><b>Treicy MONCOQ</b><p>Je travaille dans le secteur de la mode principalement dans la stratégie de communication et community management. Je fais aussi du stylisme.</p></li>
-      <li class="membre-card"><b>Tressy Cazimir</b><p>Manager artistique et chargée de développement label</p></li>
-      <li class="membre-card"><b>Tyron808</b><p>Compositeur/producer</p></li>
-      <li class="membre-card"><b>Yasin ZANDRONIS</b><p>Management et direction artistique</p></li>
-      <li class="membre-card"><b>Yohan Foule</b><p>Manageur / Producteur</p></li>
-      <li class="membre-card"><b>Zoé MANGEOT</b><p>Chargée d'administration chez Universal Music France Events (branche live et concerts d'Universal)</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Direction artistique, communication|Événementiel"><div class="membre-id"><b>Alice Hunel</b><span class="ville">Martinique</span></div><p>Communication et hôtesse événementielle</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Artiste, création"><div class="membre-id"><b>Alix SAINTE-ROSE</b><span class="ville">Martinique</span></div><p>Artiste</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Production, label, édition|Technique, son, image|Média, journalisme"><div class="membre-id"><b>Alphonse Red</b><span class="ville">Martinique</span></div><p>Média et réalisateur producteur vidéo</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Production, label, édition|Management, booking, projets|Culture, formation, médiation"><div class="membre-id"><b>Amel tintin</b><span class="ville">Guadeloupe</span></div><p>Stratège créative &amp; développement culturel international ; Accompagnatrice de talents &amp; développeuse de carrière ; Productrice de projets artistiques &amp; interculturels ; Passeuse entre les territoires &amp; créatrice de ponts ; Consultante en structuration &amp; financement culturel</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Management, booking, projets|Événementiel"><div class="membre-id"><b>Andy Pancarte</b><span class="ville">Martinique</span></div><p>Orga et manager</p></li>
+      <li class="membre-card" data-origines="Paris et Île-de-France|Reste de l&#x27;Hexagone" data-secteurs="Artiste, création|Management, booking, projets|Technique, son, image"><div class="membre-id"><b>Armelle Haure-Placé</b><span class="ville">Bretagne et Paris</span></div><p>Manageuse d'artiste - chanteuse, autrice, compositrice, interprète - ingéson studio</p></li>
+      <li class="membre-card" data-origines="Paris et Île-de-France" data-secteurs="Production, label, édition|Management, booking, projets|Direction artistique, communication"><div class="membre-id"><b>Arthur Lardière</b><span class="ville">Paris</span></div><p>Manager de Ricky Bishop / Chef de projet / DA chez Low Wood-Combo labels</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Artiste, création|Direction artistique, communication|Technique, son, image"><div class="membre-id"><b>Aurélie Chantelly</b><span class="ville">Martinique</span></div><p>Artiste visuelle : photographe réalisatrice et directrice artistique</p></li>
+      <li class="membre-card" data-origines="Guyane|Martinique" data-secteurs="Événementiel"><div class="membre-id"><b>Axel GERMANY</b><span class="ville">Guyane et Martinique</span></div><p>Organisateur d'événements</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Production, label, édition"><div class="membre-id"><b>BERTRAND COLOGER</b><span class="ville">Guadeloupe</span></div><p>Producteur</p></li>
+      <li class="membre-card" data-origines="Ailleurs" data-secteurs="Direction artistique, communication|Média, journalisme"><div class="membre-id"><b>Claire EBONG aka Ceejäe</b><span class="ville">Cameroun</span></div><p>Documenter nos musiques/artistes et créer du contenu autour de l'industrie musicale actuelle dans le but de développer à terme un vrai média</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Direction artistique, communication|Média, journalisme"><div class="membre-id"><b>Coraline Commin</b><span class="ville">Guadeloupe</span></div><p>Fondatrice d'un média, chargée de communication et attachée de presse</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Média, journalisme"><div class="membre-id"><b>Déwick Sigère</b><span class="ville">Martinique</span></div><p>Gérant média</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Management, booking, projets"><div class="membre-id"><b>Didier Atine</b><span class="ville">Martinique</span></div><p>Artist development executive</p></li>
+      <li class="membre-card" data-origines="Paris et Île-de-France|Martinique|Guadeloupe" data-secteurs="Production, label, édition|Événementiel|Culture, formation, médiation"><div class="membre-id"><b>Emmanuelle BONIFACE</b><span class="ville">Paris, Martinique et Guadeloupe</span></div><p>Chargée de production - Organisatrice d'événements (festival) - Chargée de médiation culturelle</p></li>
+      <li class="membre-card" data-origines="Paris et Île-de-France|Martinique|Ailleurs" data-secteurs="Production, label, édition|Technique, son, image|Événementiel"><div class="membre-id"><b>Eric K-Roz</b><span class="ville">Île-de-France, Martinique, L.A.</span></div><p>Production audio visuel - Galerie d'art - événement</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Management, booking, projets"><div class="membre-id"><b>Eulalie Asselin de Beauville</b><span class="ville">Martinique</span></div><p>Booker - Cheffe de projets</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Management, booking, projets|Direction artistique, communication"><div class="membre-id"><b>GNALEKO Sarafina</b><span class="ville">Guadeloupe</span></div><p>Chef de projet/DA</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Technique, son, image"><div class="membre-id"><b>Gregory Florimond</b><span class="ville">Martinique</span></div><p>Je suis graphiste spécialisé dans le sport</p></li>
+      <li class="membre-card" data-origines="Paris et Île-de-France|Martinique" data-secteurs="Direction artistique, communication|Média, journalisme"><div class="membre-id"><b>Guigs</b><span class="ville">Paris, origine Martinique</span></div><p>Créateur de contenu et Média</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Direction artistique, communication"><div class="membre-id"><b>Guilaine Goujon</b><span class="ville">Martinique</span></div><p>Directrice promo</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Production, label, édition|Direction artistique, communication|Média, journalisme"><div class="membre-id"><b>Guillaume MARIE-LOUISE (Le Beat)</b><span class="ville">Martinique</span></div><p>Label, Curateur de playlist et service pour label (agence Marketing Musical)</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Administration, juridique"><div class="membre-id"><b>Haby Athéna BÂ</b><span class="ville">Martinique</span></div><p>Legal &amp; Business Affairs</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Artiste, création|Production, label, édition|Direction artistique, communication|Technique, son, image"><div class="membre-id"><b>Hangarad Capresse</b><span class="ville">Guadeloupe</span></div><p>Productrice auteure interprète direction artistique monteuse infographiste cadreuse</p></li>
+      <li class="membre-card" data-origines="Guyane" data-secteurs="Management, booking, projets"><div class="membre-id"><b>Ismaël ALIN</b><span class="ville">Guyane</span></div><p>Chef de projet</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Direction artistique, communication"><div class="membre-id"><b>Jean-Christophe Zaïre</b><span class="ville">Martinique</span></div><p>Attaché de presse</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Artiste, création|Technique, son, image"><div class="membre-id"><b>Jean-Philippe PENNONT</b><span class="ville">Martinique</span></div><p>Artiste, Ingé son, (Compositeur et vidéaste si besoin)</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Artiste, création|Management, booking, projets|Technique, son, image"><div class="membre-id"><b>Jérémy Belrose</b><span class="ville">Martinique</span></div><p>Ingénieur du son, Auteur, Topliner, Réal, Structure d'accompagnement créatif en cours de développement</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Production, label, édition|Management, booking, projets"><div class="membre-id"><b>Jeremy Bibrac</b><span class="ville">Guadeloupe</span></div><p>Manager, producteur, éditeur</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Artiste, création"><div class="membre-id"><b>Jérémy LPL</b><span class="ville">Martinique</span></div><p>Danseur, chorégraphe et movement director</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Administration, juridique"><div class="membre-id"><b>Jérôme AMORY</b><span class="ville">Martinique (Rivière-Salée)</span></div><p>Legal &amp; Business Affairs</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Artiste, création|Production, label, édition|Technique, son, image"><div class="membre-id"><b>Jérôme MENIR</b><span class="ville">Martinique</span></div><p>Auteur-Compositeur-Chanteur / Réalisateur-Monteur / Autoproduction</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Production, label, édition"><div class="membre-id"><b>Jessy lascoste</b><span class="ville">Martinique</span></div><p>Producteur</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Production, label, édition|Média, journalisme"><div class="membre-id"><b>Juliette Réache</b><span class="ville">Guadeloupe</span></div><p>Coordinatrice label et journaliste</p></li>
+      <li class="membre-card" data-origines="Guadeloupe|Martinique" data-secteurs="Production, label, édition|Management, booking, projets|Direction artistique, communication"><div class="membre-id"><b>Karyne Mac</b><span class="ville">Guadeloupe et Martinique</span></div><p>Chargée de Production, Attachée de Presse, Manager</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Production, label, édition|Management, booking, projets"><div class="membre-id"><b>Katharina R-ECESAIRE</b><span class="ville">Origine martiniquaise</span></div><p>Artist project manager, day to day manager, consultant, production coordinator</p></li>
+      <li class="membre-card" data-origines="Guyane" data-secteurs="Artiste, création|Production, label, édition|Technique, son, image"><div class="membre-id"><b>Kerwan Montoute</b><span class="ville">Guyane</span></div><p>Artiste, Ingénieur son, producteur</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Production, label, édition"><div class="membre-id"><b>Laetitia JARVIS</b><span class="ville">Guadeloupe</span></div><p>Music publisher</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Management, booking, projets"><div class="membre-id"><b>Laurence ventura</b><span class="ville">Martinique</span></div><p>Manager d'artistes</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Direction artistique, communication"><div class="membre-id"><b>Laury Maroudin jasmin</b><span class="ville">Guadeloupe</span></div><p>Je suis directrice artistique</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Artiste, création|Production, label, édition"><div class="membre-id"><b>Lil low Blingthat</b><span class="ville">Guadeloupe</span></div><p>Chanteur, acteur, président d'association, producteur, éditeur</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Artiste, création|Direction artistique, communication"><div class="membre-id"><b>Lionel Alcindor</b><span class="ville">Martinique</span></div><p>Artiste et directeur artistique</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Direction artistique, communication"><div class="membre-id"><b>Liseron Monfils</b><span class="ville">Guadeloupe</span></div><p>Chargée éditorial et Community manager chez Universal en alternance</p></li>
+      <li class="membre-card" data-origines="Guadeloupe|Ailleurs" data-secteurs="Technique, son, image|Média, journalisme"><div class="membre-id"><b>Liza-Marie Peronne</b><span class="ville">Guadeloupe, Sénégal</span></div><p>Journaliste musique, chroniqueuse radio, réalisatrice, photographe</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Direction artistique, communication"><div class="membre-id"><b>Ludivine Rome</b><span class="ville">Martinique</span></div><p>Responsable digitale en Major</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Management, booking, projets"><div class="membre-id"><b>Ludmilla Romagne Ho-Sing-Ming</b><span class="ville">Martinique</span></div><p>Responsable des Opérations &amp; Pôle Chefs de projets (Warner Music)</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Direction artistique, communication"><div class="membre-id"><b>Maeli ERIALE</b><span class="ville">Martinique</span></div><p>DA et communication</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Artiste, création"><div class="membre-id"><b>Malcolm Renoir</b><span class="ville">Guadeloupe</span></div><p>Artiste</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Artiste, création|Management, booking, projets|Direction artistique, communication"><div class="membre-id"><b>Manuel Cinraul</b><span class="ville">Martinique</span></div><p>Community Manager, DA, Manager, Auteur, Topliner</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Production, label, édition|Management, booking, projets|Administration, juridique"><div class="membre-id"><b>Margerie Tazaro</b><span class="ville">Guadeloupe</span></div><p>Administration / Juridique / Publishing / Management</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Artiste, création|Production, label, édition|Direction artistique, communication|Culture, formation, médiation"><div class="membre-id"><b>Mathieu</b><span class="ville">Martinique</span></div><p>Artiste auteur interprète, producteur, community manager, promoteur, formateur, conseils.</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Artiste, création|Production, label, édition"><div class="membre-id"><b>Mathieu Lafine-chanol</b><span class="ville">Martinique</span></div><p>Je suis producteur/ compositeur</p></li>
+      <li class="membre-card" data-origines="Paris et Île-de-France|Guyane|Martinique" data-secteurs="Direction artistique, communication|Technique, son, image"><div class="membre-id"><b>Maÿllis Lindor</b><span class="ville">Paris (Guyane, Martinique)</span></div><p>Directrice artistique, photographe, vidéaste</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Direction artistique, communication"><div class="membre-id"><b>Mélina Charlery</b><span class="ville">Martinique</span></div><p>Je travaille dans la direction artistique. Actuellement je suis dans une maison de maroquinerie et j'ai également ma micro entreprise. Je travaille également sur un projet pour mettre en avant le design et l'art caribéen :)</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Culture, formation, médiation"><div class="membre-id"><b>Michael JOHN</b><span class="ville">Guadeloupe</span></div><p>Ingénieur Culturel</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Direction artistique, communication|Culture, formation, médiation"><div class="membre-id"><b>Michèle BELTAN</b><span class="ville">Martinique</span></div><p>Promotion/ communication digitale/ Marketing musical / formation professionnelle d'adultes</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Artiste, création|Technique, son, image"><div class="membre-id"><b>Nathan Delinde</b><span class="ville">Martinique</span></div><p>Artiste, beatmaker, ingénieur son studio/live</p></li>
+      <li class="membre-card" data-origines="Guyane" data-secteurs="Artiste, création"><div class="membre-id"><b>Nathan MICHEL (NJAM)</b><span class="ville">Guyane</span></div><p>Artiste, beatmaker</p></li>
+      <li class="membre-card" data-origines="Ailleurs" data-secteurs="Culture, formation, médiation"><div class="membre-id"><b>Noor-Sharina Grondin</b><span class="ville">La Réunion</span></div><p>Doctorante et médiatrice culturelle</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Artiste, création|Technique, son, image"><div class="membre-id"><b>Oneal CHATELOT</b><span class="ville">Guadeloupe</span></div><p>Je suis beatmaker et ingénieur du son</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Production, label, édition|Management, booking, projets"><div class="membre-id"><b>Patrice louisor - Kaiser</b><span class="ville">Guadeloupe</span></div><p>Production. Éditeur. Distribution Digital. Chef de projet</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Artiste, création"><div class="membre-id"><b>Pricilla AMBERT</b><span class="ville">Martinique</span></div><p>Artiste indépendante</p></li>
+      <li class="membre-card" data-origines="Paris et Île-de-France" data-secteurs="Management, booking, projets|Direction artistique, communication|Administration, juridique"><div class="membre-id"><b>Quentin Rolland</b><span class="ville">Paris</span></div><p>Accompagnement d'artistes (administratif, marketing, développement)</p></li>
+      <li class="membre-card" data-origines="Guadeloupe|Martinique" data-secteurs="Management, booking, projets|Direction artistique, communication|Événementiel"><div class="membre-id"><b>Raïssa CHALU</b><span class="ville">Guadeloupe et Martinique</span></div><p>Manager danseurs, manager directeur artistique, coordination festival, coordination régie artistique</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Autre"><div class="membre-id"><b>Ronny Turiaf</b><span class="ville">Martinique (Morne Vert)</span></div><p>Fondateur Résidence Créative + Investisseur</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Artiste, création"><div class="membre-id"><b>Rudy RICHARD-EDMOND</b><span class="ville">Martinique</span></div><p>Auteur Compositeur Interprète</p></li>
+      <li class="membre-card" data-origines="Reste de l&#x27;Hexagone" data-secteurs="Production, label, édition|Administration, juridique"><div class="membre-id"><b>Salomé Duhoo</b><span class="ville">Rennes, Bretagne</span></div><p>Administratrice de production de musiques actuelles et consultante RSE musiques actuelles</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Artiste, création"><div class="membre-id"><b>Samoney samoney</b><span class="ville">Guadeloupe</span></div><p>Compositeur</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Artiste, création"><div class="membre-id"><b>Samuel LONGCHAMPS</b><span class="ville">Martinique</span></div><p>Chanteur rappeur</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Production, label, édition|Direction artistique, communication"><div class="membre-id"><b>Samuel SUEDOIS</b><span class="ville">Guadeloupe</span></div><p>Directeur Artistique, Editeur</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Direction artistique, communication|Média, journalisme"><div class="membre-id"><b>Samyrah Gustave</b><span class="ville">Le Gosier, Guadeloupe</span></div><p>Je suis co-fondatrice du média musical The Youth TV et directrice artistique freelance.</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Média, journalisme|Événementiel"><div class="membre-id"><b>Sonny R.</b><span class="ville">Martinique</span></div><p>Média, Organisateur événementiel</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Direction artistique, communication|Événementiel"><div class="membre-id"><b>Steeve Populo</b><span class="ville">Martinique</span></div><p>Directeur Promotion / Relations presses / Events / Image</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Média, journalisme|Événementiel"><div class="membre-id"><b>Swan Badol</b><span class="ville">Martinique</span></div><p>Média et Organisateur Événementiel</p></li>
+      <li class="membre-card" data-origines="Martinique|Guadeloupe" data-secteurs="Artiste, création"><div class="membre-id"><b>Taïna LAURENCIN</b><span class="ville">Martinique et Guadeloupe</span></div><p>Je suis étudiante et artiste</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Management, booking, projets"><div class="membre-id"><b>Taïriq</b><span class="ville">Guadeloupe</span></div><p>Manager</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Direction artistique, communication"><div class="membre-id"><b>Treicy MONCOQ</b><span class="ville">Martinique</span></div><p>Je travaille dans le secteur de la mode principalement dans la stratégie de communication et community management. Je fais aussi du stylisme.</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Production, label, édition|Management, booking, projets"><div class="membre-id"><b>Tressy Cazimir</b><span class="ville">Guadeloupe</span></div><p>Manager artistique et chargée de développement label</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Artiste, création|Production, label, édition"><div class="membre-id"><b>Tyron808</b><span class="ville">Martinique</span></div><p>Compositeur/producer</p></li>
+      <li class="membre-card" data-origines="Guadeloupe" data-secteurs="Management, booking, projets|Direction artistique, communication"><div class="membre-id"><b>Yasin ZANDRONIS</b><span class="ville">Guadeloupe</span></div><p>Management et direction artistique</p></li>
+      <li class="membre-card" data-origines="Reste de l&#x27;Hexagone" data-secteurs="Production, label, édition|Management, booking, projets"><div class="membre-id"><b>Yohan Foule</b><span class="ville">L'Oise</span></div><p>Manageur / Producteur</p></li>
+      <li class="membre-card" data-origines="Martinique" data-secteurs="Événementiel|Administration, juridique"><div class="membre-id"><b>Zoé MANGEOT</b><span class="ville">Martinique</span></div><p>Chargée d'administration chez Universal Music France Events (branche live et concerts d'Universal)</p></li>
     </ul>
     <p class="annuaire-empty" id="f-empty" hidden>Aucun membre ne correspond à cette recherche.</p>
+    <nav class="pager" id="pager" aria-label="Pages de l'annuaire"></nav>
 
     <!-- Compteur : 170 membres référencés sur un objectif de 200 (chiffres de la campagne d'adhésion 2026).
          Pour changer : data-count et le texte du premier <b>, le texte du second <b>, et --p (= référencés ÷ objectif). -->
@@ -244,6 +269,6 @@
   <div class="foot-bottom">© 2026 Karibbean Sound Nation · Association loi 1901 · <a href="#">Mentions légales</a></div>
 </footer>
 
-<script src="js/main.js?v=20261118d"></script>
+<script src="js/main.js?v=20261118f"></script>
 </body>
 </html>

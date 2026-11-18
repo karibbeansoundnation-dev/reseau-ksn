@@ -365,13 +365,42 @@ nav a.active { color: var(--gold); box-shadow: inset 0 -2px 0 var(--gold); borde
 .filters input { -webkit-appearance: none; appearance: none; }
 .filters input[type="search"] { flex: 1 1 18rem; max-width: 30rem; }
 .annuaire-count { margin: 0 0 .8rem; font-size: .76rem; font-weight: 700; text-transform: uppercase; letter-spacing: .16em; color: var(--gold-ink); }
-.annuaire { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3rem; border-top: 1.5px solid var(--teal); }
-.membre-card { padding: 1.1rem 0; border-bottom: 1px solid var(--line); min-width: 0; }
-.membre-card b { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 1.1rem; letter-spacing: .03em; color: var(--teal); display: block; line-height: 1.25; margin-bottom: .3rem; overflow-wrap: anywhere; }
-.membre-card p { margin: 0; font-size: .95rem; line-height: 1.5; }
+.filters { scroll-margin-top: 6rem; }
+.filters select { flex: 0 1 17rem; min-width: 0; }
+.annuaire { list-style: none; margin: 0; padding: 0; border-top: 1.5px solid var(--teal); }
+.membre-card {
+  display: grid; grid-template-columns: minmax(11rem, 17rem) minmax(0, 1fr); gap: .4rem 2.4rem; align-items: start;
+  padding: 1.3rem 0; border-bottom: 1px solid var(--line);
+}
+.membre-card[hidden] { display: none; }
+.membre-id { min-width: 0; }
+.membre-card b { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 1.1rem; letter-spacing: .03em; color: var(--teal); display: block; line-height: 1.25; overflow-wrap: anywhere; }
+.membre-card .ville { display: block; margin-top: .2rem; font-size: .85rem; font-weight: 500; color: var(--gold-ink); }
+.membre-card p { margin: 0; font-size: .95rem; line-height: 1.55; }
 .annuaire-empty { margin-top: 1.4rem; }
 .annuaire-empty[hidden] { display: none; }
-@media (max-width: 800px) { .annuaire { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 700px) { .membre-card { grid-template-columns: minmax(0, 1fr); gap: .5rem; } }
+
+/* Pages de l'annuaire */
+.pager { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: .5rem; margin-top: 1.8rem; }
+.pager[hidden] { display: none; }
+.pager button {
+  font: inherit; font-size: .9rem; font-weight: 700; color: var(--teal); cursor: pointer;
+  min-width: 44px; min-height: 44px; padding: .4rem .9rem; border-radius: var(--r-field);
+  border: 1.5px solid var(--teal); background: transparent;
+}
+@media (hover: hover) { .pager button:not(:disabled):not([aria-current]):hover { background: var(--gold-pale); } }
+.pager button[aria-current] { background: var(--teal); color: var(--cream); cursor: default; }
+.pager button:disabled { opacity: .35; cursor: default; }
+.pager button:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(227, 181, 103, .6); }
+.pager-nums { display: flex; align-items: center; gap: .5rem; }
+.pager-nums span { color: var(--gold-ink); font-weight: 700; padding: 0 .1rem; }
+.pager-info { display: none; font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--gold-ink); }
+@media (max-width: 640px) {
+  .pager { justify-content: space-between; }
+  .pager-nums { display: none; }
+  .pager-info { display: block; }
+}
 
 /* Annuaire en construction : compteur de membres référencés et jauge vers l'objectif */
 .build { margin-top: 2rem; text-align: center; }
