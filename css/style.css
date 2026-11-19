@@ -855,7 +855,7 @@ section[id], .news[id] { scroll-margin-top: 5.5rem; }
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     header::before { background: rgba(4, 47, 53, .97); }
   }
-  .nav { height: 54px; padding-top: 0; padding-bottom: 0; }
+  .nav { height: 54px; padding-top: 0; padding-bottom: 0; gap: 0; }   /* gap 0 : le <nav> du menu (plein écran) est vide dans la barre */
   .brand img { height: 34px; }
   /* La barre flotte au-dessus du héro (qui remonte dessous) : c'est ce qui rend le verre dépoli visible */
   :root { --hdr: calc(54px + env(safe-area-inset-top)); }
@@ -866,6 +866,7 @@ section[id], .news[id] { scroll-margin-top: 5.5rem; }
   /* Burger : deux traits qui se croisent en croix, sans cadre */
   .burger {
     width: 44px; height: 44px; font-size: 0; border: 0; border-radius: 50%; background: none;
+    margin-left: auto; margin-right: -12px;   /* tout à droite : les traits (12 px de marge intérieure) s'alignent sur la marge droite de la page */
     -webkit-tap-highlight-color: transparent;
   }
   .burger::before, .burger::after {
