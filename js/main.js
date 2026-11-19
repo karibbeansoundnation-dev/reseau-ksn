@@ -35,7 +35,7 @@ document.querySelectorAll('nav a').forEach(a => {
   if (a.getAttribute('href') === page) a.classList.add('active');
 });
 
-// Annuaire (page réseau) : recherche, filtres origine et secteur, pastilles de territoire, filtres actifs,
+// Annuaire (page réseau) : recherche, filtres territoire et secteur, pastilles de territoire, filtres actifs,
 // pages de 12 fiches (8 sur tablette, 5 sur téléphone). Sans JavaScript, toute la liste reste affichée.
 const annuaire = document.querySelector('.annuaire');
 if (annuaire) {
@@ -58,7 +58,7 @@ if (annuaire) {
   const vide = document.getElementById('f-empty');
   const pager = document.getElementById('pager');
   const norm = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-  // La recherche porte sur le nom, l'origine et le rôle, pas sur les secteurs (ceux-ci ont leur filtre).
+  // La recherche porte sur le nom, le territoire et le rôle, pas sur les secteurs (ceux-ci ont leur filtre).
   const textes = new Map(cartes.map((c) => [c, norm(
     ['.membre-nom', '.membre-type', '.membre-role'].map((s) => c.querySelector(s)?.textContent || '').join(' ')
   )]));
