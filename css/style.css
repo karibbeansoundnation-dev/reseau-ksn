@@ -229,6 +229,9 @@ nav a.active { color: var(--gold); box-shadow: inset 0 -2px 0 var(--gold); borde
   display: grid; grid-template-columns: repeat(4, 1fr);
   border-top: 1.5px solid var(--teal); border-bottom: 1.5px solid var(--teal);
 }
+/* Juste sous le bandeau or : pas d'espace entre les deux, le filet du bandeau fait office de filet du haut */
+.marquee + .stats { padding-top: 0; }
+.marquee + .stats .stats-grid { border-top: 0; }
 .stat { padding: 1.8rem 1.4rem; border-left: 1px solid var(--line); }
 .stat:first-child { border-left: 0; }
 .stat b {
