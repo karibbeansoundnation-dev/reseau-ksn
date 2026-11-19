@@ -319,12 +319,12 @@ function initAnims() {
   document.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el));
 }
 
-// Compteurs animés : chiffres clés ("170+", "3", "170", "15") et compteur d'annuaire (page Le réseau)
+// Compteurs animés : chiffres clés ("+180", "3", "~8 000", "15") et compteur d'annuaire (page Le réseau)
 function countUp(statEl) {
   const b = statEl.querySelector('b');
   if (!b || b.dataset.done) return;
   b.dataset.done = '1';
-  // « 170+ », « 15 », « ~8 000 » : préfixe, nombre (espace des milliers permise), suffixe
+  // « +180 », « 15 », « ~8 000 » : préfixe, nombre (espace des milliers permise), suffixe
   const m = b.textContent.trim().match(/^(\D*?)([\d\s]+)(\D*)$/);
   if (!m) return;
   const prefix = m[1], suffix = m[3];

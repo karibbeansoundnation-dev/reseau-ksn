@@ -272,7 +272,7 @@ nav a.active { color: var(--gold); box-shadow: inset 0 -2px 0 var(--gold); borde
 .seeking-title {
   font-family: var(--display); font-weight: 400; text-transform: uppercase;
   color: var(--teal); letter-spacing: .02em; line-height: .97;
-  font-size: clamp(2.2rem, 5.5vw, 3.8rem); margin-bottom: 2.2rem;
+  font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: 1.5rem;
 }
 .seeking-list { list-style: none; margin: 0; padding: 0; border-top: 1.5px solid var(--teal); }
 .seek-item { border-bottom: 1.5px solid var(--teal); }
@@ -280,7 +280,7 @@ nav a.active { color: var(--gold); box-shadow: inset 0 -2px 0 var(--gold); borde
 /* La ligne entière est cliquable */
 .seek {
   display: grid; grid-template-columns: 1fr auto; align-items: center;
-  gap: clamp(1rem, 3vw, 2.4rem); padding: clamp(1.3rem, 2.6vw, 2rem) clamp(1rem, 2.4vw, 1.8rem);
+  gap: clamp(1rem, 3vw, 2.4rem); padding: clamp(.95rem, 1.8vw, 1.35rem) clamp(1rem, 2.4vw, 1.8rem);
   text-decoration: none; color: var(--teal); background: transparent;
   transition: background .35s var(--ease-out), color .35s var(--ease-out);
 }
@@ -288,11 +288,11 @@ nav a.active { color: var(--gold); box-shadow: inset 0 -2px 0 var(--gold); borde
 .seek-name {
   font-family: var(--display); font-weight: 400; text-transform: uppercase;
   letter-spacing: .02em; line-height: 1.02; color: inherit;
-  font-size: clamp(1.5rem, 3.6vw, 2.6rem);
+  font-size: clamp(1.35rem, 2.8vw, 2rem);
 }
 .seek-desc { font-size: clamp(.92rem, 1.1vw, 1.05rem); color: var(--muted); transition: color .35s var(--ease-out); }
 .seek-arrow {
-  width: clamp(44px, 4.2vw, 56px); height: clamp(44px, 4.2vw, 56px); flex: none;
+  width: clamp(40px, 3.6vw, 48px); height: clamp(40px, 3.6vw, 48px); flex: none;
   border-radius: 50%; border: 1.5px solid currentColor;
   display: grid; place-items: center; color: inherit;
   transition: background .35s var(--ease-out), color .35s var(--ease-out),
