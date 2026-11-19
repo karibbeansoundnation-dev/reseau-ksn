@@ -1,5 +1,5 @@
 // ============================================================
-// KSN — scripts du site (navigation, formulaires, cartes à faire glisser)
+// KSN — scripts du site (navigation, formulaires, animations)
 // ============================================================
 
 // --- À PERSONNALISER ---------------------------------------
@@ -35,22 +35,32 @@ document.querySelectorAll('nav a').forEach(a => {
   if (a.getAttribute('href') === page) a.classList.add('active');
 });
 
-// Annuaire (page réseau) : recherche, filtres origine et secteur, pages de 5 membres.
-// Sans JavaScript, toute la liste reste affichée.
+// Annuaire (page réseau) : recherche, filtres origine et secteur, pastilles de territoire, filtres actifs,
+// pages de 12 fiches (8 sur tablette, 5 sur téléphone). Sans JavaScript, toute la liste reste affichée.
 const annuaire = document.querySelector('.annuaire');
 if (annuaire) {
-  const PAR_PAGE = 5;
+  const mqGrand = window.matchMedia('(min-width: 901px)');   // 3 colonnes
+  const mqMoyen = window.matchMedia('(min-width: 601px)');   // 2 colonnes
+  const parPage = () => (mqGrand.matches ? 12 : mqMoyen.matches ? 8 : 5);
+  let taille = parPage();
   const cartes = [...annuaire.querySelectorAll('.membre-card')];
   const fSearch = document.getElementById('f-search');
   const fOrigine = document.getElementById('f-origine');
   const fSecteur = document.getElementById('f-secteur');
+  const fForm = document.getElementById('f-form');
+  const fToggle = document.getElementById('f-toggle');
+  const fPanel = document.getElementById('f-panel');
+  const fBadge = document.getElementById('f-badge');
+  const fQuick = document.getElementById('f-quick');
+  const fReset = document.getElementById('f-reset');
+  const fActive = document.getElementById('f-active');
   const compte = document.getElementById('f-count');
   const vide = document.getElementById('f-empty');
   const pager = document.getElementById('pager');
   const norm = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-  // La recherche porte sur le nom, l'origine et le rôle, pas sur les étiquettes de secteur (celles-ci ont leur filtre).
+  // La recherche porte sur le nom, l'origine et le rôle, pas sur les secteurs (ceux-ci ont leur filtre).
   const textes = new Map(cartes.map((c) => [c, norm(
-    (c.querySelector('.membre-id')?.textContent || '') + ' ' + (c.querySelector('.membre-role')?.textContent || '')
+    ['.membre-nom', '.membre-type', '.membre-role'].map((s) => c.querySelector(s)?.textContent || '').join(' ')
   )]));
   let page = 1;
 
@@ -58,6 +68,34 @@ if (annuaire) {
     (!q || textes.get(c).includes(q)) &&
     (!o || c.dataset.origines.split('|').includes(o)) &&
     (!s || c.dataset.secteurs.split('|').includes(s));
+
+  // Rôles longs : 4 lignes puis « Lire la suite » (le bouton n'apparaît que si le texte est vraiment coupé)
+  cartes.forEach((c) => {
+    const role = c.querySelector('.membre-role');
+    if (!role) return;
+    role.classList.add('is-clamped');
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'membre-more';
+    b.textContent = 'Lire la suite';
+    b.hidden = true;
+    b.setAttribute('aria-expanded', 'false');
+    b.addEventListener('click', () => {
+      const ouvert = role.classList.toggle('is-open');
+      b.textContent = ouvert ? 'Réduire' : 'Lire la suite';
+      b.setAttribute('aria-expanded', String(ouvert));
+    });
+    role.after(b);
+  });
+  function mesurer() {
+    cartes.forEach((c) => {
+      if (c.hidden) return;
+      const role = c.querySelector('.membre-role');
+      const b = c.querySelector('.membre-more');
+      if (!role || !b || role.classList.contains('is-open')) return;
+      b.hidden = !(role.scrollHeight > role.clientHeight + 1);
+    });
+  }
 
   function bouton(texte, cible, { actif = false, desactive = false, label = '', classe = '' } = {}) {
     const b = document.createElement('button');
@@ -84,19 +122,50 @@ if (annuaire) {
     return sortie;
   }
 
+  // Filtres actifs : une pastille par filtre, un clic la retire
+  function pastilles(q, o, s) {
+    const liste = [];
+    if (q) liste.push({ texte: '« ' + fSearch.value.trim() + ' »', retirer: () => { fSearch.value = ''; } });
+    if (o) liste.push({ texte: o, retirer: () => { fOrigine.value = ''; } });
+    if (s) liste.push({ texte: s, retirer: () => { fSecteur.value = ''; } });
+    const ul = fActive.querySelector('ul');
+    ul.replaceChildren(...liste.map(({ texte, retirer }) => {
+      const li = document.createElement('li');
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = texte;
+      b.setAttribute('aria-label', 'Retirer le filtre : ' + texte);
+      b.addEventListener('click', () => { retirer(); page = 1; rendre(false); });
+      li.append(b);
+      return li;
+    }));
+    fActive.hidden = liste.length === 0;
+    if (fReset) fReset.hidden = liste.length === 0;
+  }
+
   function rendre(defiler) {
     const q = norm(fSearch?.value || '').trim();
     const o = fOrigine?.value || '', s = fSecteur?.value || '';
     const trouvees = cartes.filter((c) => correspond(c, q, o, s));
-    const pages = Math.max(1, Math.ceil(trouvees.length / PAR_PAGE));
+    const pages = Math.max(1, Math.ceil(trouvees.length / taille));
     page = Math.min(Math.max(page, 1), pages);
-    const debut = (page - 1) * PAR_PAGE;
-    const visibles = new Set(trouvees.slice(debut, debut + PAR_PAGE));
+    const debut = (page - 1) * taille;
+    const visibles = new Set(trouvees.slice(debut, debut + taille));
     cartes.forEach((c) => { c.hidden = !visibles.has(c); });
 
     const n = trouvees.length;
-    if (compte) compte.textContent = n + (n > 1 ? ' membres' : ' membre');
+    if (compte) {
+      const nombre = document.createElement('strong');
+      nombre.textContent = String(n);
+      compte.replaceChildren(nombre, n > 1 ? ' membres dans l’annuaire' : ' membre dans l’annuaire');
+    }
     if (vide) vide.hidden = n > 0;
+
+    // Barre de filtres : compteur sur le bouton, pastilles de territoire, filtres actifs
+    const nbSelects = (o ? 1 : 0) + (s ? 1 : 0);
+    if (fBadge) { fBadge.textContent = String(nbSelects); fBadge.hidden = nbSelects === 0; }
+    fQuick?.querySelectorAll('[data-origine]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.origine === o)));
+    if (fActive) pastilles(q, o, s);
 
     if (pager) {
       pager.replaceChildren();
@@ -123,10 +192,50 @@ if (annuaire) {
         pager.append(bouton('Suivant', page + 1, { desactive: page === pages, classe: 'pager-nav' }));
       }
     }
-    if (defiler) document.getElementById('f-search')?.closest('.filters')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    mesurer();
+    if (defiler) document.getElementById('filtres')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
   }
 
   [fSearch, fOrigine, fSecteur].forEach((el) => el?.addEventListener('input', () => { page = 1; rendre(false); }));
+  fForm?.addEventListener('submit', (e) => { e.preventDefault(); page = 1; rendre(true); fSearch.blur(); });
+
+  // Boutons réservés à JavaScript : filtres repliables, territoires, réinitialiser
+  if (fToggle && fPanel) {
+    fPanel.hidden = true;
+    fToggle.hidden = false;
+    fToggle.addEventListener('click', () => {
+      const ouvert = fPanel.hidden;
+      fPanel.hidden = !ouvert;
+      fToggle.setAttribute('aria-expanded', String(ouvert));
+    });
+  }
+  if (fQuick) {
+    fQuick.hidden = false;
+    fQuick.querySelectorAll('[data-origine]').forEach((b) => b.addEventListener('click', () => {
+      fOrigine.value = fOrigine.value === b.dataset.origine ? '' : b.dataset.origine;
+      page = 1;
+      rendre(false);
+    }));
+  }
+  fReset?.addEventListener('click', () => {
+    fSearch.value = ''; fOrigine.value = ''; fSecteur.value = '';
+    page = 1;
+    rendre(false);
+  });
+
+  // Le nombre de fiches par page suit le nombre de colonnes : on garde la même première fiche à l'écran
+  const surChangement = () => {
+    const nouvelle = parPage();
+    if (nouvelle === taille) return;
+    page = Math.floor(((page - 1) * taille) / nouvelle) + 1;
+    taille = nouvelle;
+    rendre(false);
+  };
+  mqGrand.addEventListener('change', surChangement);
+  mqMoyen.addEventListener('change', surChangement);
+  let attente = 0;
+  window.addEventListener('resize', () => { cancelAnimationFrame(attente); attente = requestAnimationFrame(mesurer); });
+
   rendre(false);
 }
 
@@ -178,6 +287,76 @@ document.getElementById('form-contact')?.addEventListener('submit', (e) => {
   location.href = `mailto:${KSN_EMAIL}?subject=${encodeURIComponent('Contact KSN : ' + sujet)}&body=${encodeURIComponent(body)}`;
 });
 
+// ============================================================
+// ANIMATIONS
+// ============================================================
+// Reveal au scroll : cartes, titres, blocs — avec décalage en cascade
+function initAnims() {
+  if (reduceMotion) return;
+
+  const targets = document.querySelectorAll(
+    '.card, .seek-item, .stat, .tl-item, .member, .event, section h2, section .eyebrow, .seeking-eyebrow, .ksn-form, .filters'
+  );
+  targets.forEach(el => {
+    if (el.classList.contains('reveal')) return;
+    if (el.closest('[style*="display: none"], [style*="display:none"]')) return;
+    el.classList.add('reveal');
+    // cascade : décalage selon la position dans le parent
+    const siblings = el.parentElement ? [...el.parentElement.children].filter(c => c.classList.contains('reveal')) : [el];
+    const idx = siblings.indexOf(el);
+    el.style.setProperty('--d', `${Math.min(idx, 6) * 0.09}s`);
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        en.target.classList.add('visible');
+        io.unobserve(en.target);
+        if (en.target.classList.contains('stat') || en.target.classList.contains('build')) countUp(en.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => io.observe(el));
+}
+
+// Compteurs animés : chiffres clés ("170+", "3", "170", "15") et compteur d'annuaire (page Le réseau)
+function countUp(statEl) {
+  const b = statEl.querySelector('b');
+  if (!b || b.dataset.done) return;
+  b.dataset.done = '1';
+  // « 170+ », « 15 », « ~8 000 » : préfixe, nombre (espace des milliers permise), suffixe
+  const m = b.textContent.trim().match(/^(\D*?)([\d\s]+)(\D*)$/);
+  if (!m) return;
+  const prefix = m[1], suffix = m[3];
+  const num = parseInt(m[2].replace(/\D/g, ''), 10);
+  if (isNaN(num)) return;
+  const fmt = (n) => n.toLocaleString('fr-FR').replace(/[\u202f\u00a0]/g, '\u00a0');   // espace insécable des milliers
+  const dur = 1400, t0 = performance.now();
+  const tick = (t) => {
+    const p = Math.min((t - t0) / dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    b.textContent = prefix + fmt(Math.round(num * eased)) + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+// Marquee : duplique le contenu pour une boucle sans couture
+document.querySelectorAll('.marquee-track').forEach(track => {
+  track.innerHTML += track.innerHTML;
+});
+
+// Parallaxe légère sur le logo du héro (grands écrans seulement : sur iPhone, rien à faire défiler)
+if (!reduceMotion && window.matchMedia('(min-width: 641px)').matches) {
+  const spiral = document.querySelector('.hero .hero-spiral');
+  if (spiral) {
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < window.innerHeight) spiral.style.marginTop = `${y * 0.08}px`;
+    }, { passive: true });
+  }
+}
+
 // Cartes à faire glisser (mobile) : pastilles de position, cliquables, recalculées si un filtre masque des cartes
 function refreshSwipe() {
   document.querySelectorAll('.swipe').forEach((sw) => {
@@ -219,3 +398,4 @@ function markSwipe(sw, dots) {
 refreshSwipe();
 window.addEventListener('resize', refreshSwipe);
 
+initAnims();
