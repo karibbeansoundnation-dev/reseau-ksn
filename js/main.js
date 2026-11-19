@@ -48,10 +48,14 @@ if (annuaire) {
   const vide = document.getElementById('f-empty');
   const pager = document.getElementById('pager');
   const norm = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  // La recherche porte sur le nom, l'origine et le rôle, pas sur les étiquettes de secteur (celles-ci ont leur filtre).
+  const textes = new Map(cartes.map((c) => [c, norm(
+    (c.querySelector('.membre-id')?.textContent || '') + ' ' + (c.querySelector('.membre-role')?.textContent || '')
+  )]));
   let page = 1;
 
   const correspond = (c, q, o, s) =>
-    (!q || norm(c.textContent).includes(q)) &&
+    (!q || textes.get(c).includes(q)) &&
     (!o || c.dataset.origines.split('|').includes(o)) &&
     (!s || c.dataset.secteurs.split('|').includes(s));
 
