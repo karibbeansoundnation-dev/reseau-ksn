@@ -655,6 +655,12 @@ form.ksn-form input, form.ksn-form textarea { -webkit-appearance: none; appearan
 .event .tag { margin-bottom: .5rem; }
 .event h3 { margin: 0 0 .25rem; }
 .event p { font-size: .92rem; color: var(--muted); }
+.event p.event-meta { font-weight: 700; color: var(--teal); margin: 0 0 .35rem; }
+.event-steps { list-style: none; margin: .8rem 0 0; padding: 0; display: grid; gap: .45rem; font-size: .92rem; }
+.event-steps li { display: flex; flex-wrap: wrap; align-items: baseline; gap: .15rem .6rem; color: var(--ink); }
+.event-steps li span { font-weight: 700; color: var(--teal); min-width: 9.5rem; }
+.event-steps a.more { font-size: .82rem; }
+@media (max-width: 600px) { .event-steps li span { flex-basis: 100%; } }   /* téléphone : la date au-dessus du lieu, partout pareil */
 .event.past { background: transparent; border-style: dashed; }
 .event.past:hover { translate: none; box-shadow: none; }
 .event.past .event-date b { color: var(--muted); }
